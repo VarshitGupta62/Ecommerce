@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
 <head>
     <!-- Required meta tags -->
@@ -163,117 +163,55 @@
                                         <span class="hide-menu">Dashboard 3</span>
                                     </a>
                                 </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
-                                        <iconify-icon icon="solar:home-angle-line-duotone"></iconify-icon>
-                                        <span class="hide-menu">Front Pages</span>
-                                    </a>
-                                    <ul aria-expanded="false" class="collapse first-level">
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link" href="frontend-landingpage.html">
-                                                <span class="icon-small"></span>
-                                                Homepage
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link" href="frontend-aboutpage.html">
-                                                <span class="icon-small"></span>
-                                                About Us
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link" href="frontend-blogpage.html">
-                                                <span class="icon-small"></span>
-                                                Blog
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link" href="frontend-blogdetailpage.html">
-                                                <span class="icon-small"></span>
-                                                Blog Details
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link" href="frontend-contactpage.html">
-                                                <span class="icon-small"></span>
-                                                Contact Us
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link" href="frontend-portfoliopage.html">
-                                                <span class="icon-small"></span>
-                                                Portfolio
-                                            </a>
-                                        </li>
-                                        <li class="sidebar-item">
-                                            <a class="sidebar-link" href="frontend-pricingpage.html">
-                                                <span class="icon-small"></span>
-                                                Pricing
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                
                             </ul>
                         </nav>
 
                         <!-- ---------------------------------- -->
                         <!-- Pages -->
                         <!-- ---------------------------------- -->
-                         
+
 
                         <!-- ---------------------------------- -->
                         <!-- Forms -->
                         <!-- ---------------------------------- -->
-                        
+
 
                         <!-- ---------------------------------- -->
                         <!-- Tables -->
                         <!-- ---------------------------------- -->
-                         
+
 
                         <!-- ---------------------------------- -->
                         <!-- Charts -->
                         <!-- ---------------------------------- -->
-                        
+
 
                         <!-- ---------------------------------- -->
                         <!-- Ui Components -->
                         <!-- ---------------------------------- -->
-                         
+
 
                         <!-- ---------------------------------- -->
                         <!-- Comoponents -->
                         <!-- ---------------------------------- -->
-                        
+
 
                         <!-- ---------------------------------- -->
                         <!-- Auth Pages -->
                         <!-- ---------------------------------- -->
-                        
+
 
                         <!-- ---------------------------------- -->
                         <!-- Docs & Other -->
                         <!-- ---------------------------------- -->
-                        
+
                     </div>
                 </div>
             </div>
         </aside>
-        <!-----------------------------------------------  Sidebar End ------------------------------>
-
-
-
+        <!--  Sidebar End -->
         <div class="page-wrapper">
-
-
-
             <!--  Header Start -->
-
-
-
             <header class="topbar">
                 <div class="with-vertical">
                     <!-- ---------------------------------- -->
@@ -291,7 +229,70 @@
                                     <iconify-icon icon="solar:magnifer-linear" class="fs-6"></iconify-icon>
                                 </a>
                             </li>
-                            
+                            <li class="nav-item d-none d-lg-flex dropdown nav-icon-hover-bg rounded-circle">
+                                <div class="hover-dd">
+                                    <a class="nav-link" id="drop2" href="javascript:void(0)" aria-haspopup="true" aria-expanded="false">
+                                        <iconify-icon icon="solar:widget-3-line-duotone" class="fs-6"></iconify-icon>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-nav dropdown-menu-animate-up py-0 overflow-hidden" aria-labelledby="drop2">
+                                        <div class="position-relative">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="p-4 pb-3">
+
+                                                        <div class="row">
+                                                             
+                                                            <div class="col-md-6">
+                                                                <div class="position-relative">
+                                                                    <a href="page-user-profile.html" class="d-flex align-items-center pb-9 position-relative">
+                                                                        <div class="bg-success-subtle rounded round-48 me-3 d-flex align-items-center justify-content-center">
+                                                                            <iconify-icon icon="solar:user-bold-duotone" class="fs-7 text-success"></iconify-icon>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h6 class="mb-0">User Profile</h6>
+                                                                            <span class="fs-11 d-block text-body-color">learn more information</span>
+                                                                        </div>
+                                                                    </a>
+                                                                    <a href="app-calendar.html" class="d-flex align-items-center pb-9 position-relative">
+                                                                        <div class="bg-primary-subtle rounded round-48 me-3 d-flex align-items-center justify-content-center">
+                                                                            <iconify-icon icon="solar:calendar-minimalistic-bold-duotone" class="fs-7 text-primary"></iconify-icon>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h6 class="mb-0">Calendar App</h6>
+                                                                            <span class="fs-11 d-block text-body-color">Get dates</span>
+                                                                        </div>
+                                                                    </a>
+                                                                    <a href="app-contact.html" class="d-flex align-items-center pb-9 position-relative">
+                                                                        <div class="bg-secondary-subtle rounded round-48 me-3 d-flex align-items-center justify-content-center">
+                                                                            <iconify-icon icon="solar:smartphone-2-bold-duotone" class="fs-7 text-secondary"></iconify-icon>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h6 class="mb-0">Contact List Table</h6>
+                                                                            <span class="fs-11 d-block text-body-color">Add new contact</span>
+                                                                        </div>
+                                                                    </a>
+                                                                    <a href="app-notes.html" class="d-flex align-items-center pb-9 position-relative">
+                                                                        <div class="bg-warning-subtle rounded round-48 me-3 d-flex align-items-center justify-content-center">
+                                                                            <iconify-icon icon="solar:notes-bold-duotone" class="fs-7 text-warning"></iconify-icon>
+                                                                        </div>
+                                                                        <div>
+                                                                            <h6 class="mb-0">Notes Application</h6>
+                                                                            <span class="fs-11 d-block text-body-color">To-do and Daily tasks</span>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 d-none d-lg-flex">
+                                                    <img src="assets/images/backgrounds/mega-dd-bg.jpg" alt="mega-dd" class="img-fluid mega-dd-bg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
 
                         <div class="d-block d-lg-none py-9 py-xl-0">
@@ -324,7 +325,7 @@
 
                                      
 
-                                      
+                                    
 
                                     <!-- ------------------------------- -->
                                     <!-- start profile Dropdown -->
@@ -368,7 +369,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                 <!-- ------------------------------- -->
+                                    <!-- ------------------------------- -->
                                     <!-- end profile Dropdown -->
                                     <!-- ------------------------------- -->
                                 </ul>
@@ -379,21 +380,6 @@
                     <!-- End Vertical Layout Header -->
                     <!-- ---------------------------------- -->
 
-                    <!-- ------------------------------- -->
-                    <!-- apps Dropdown in Small screen -->
-                    <!-- ------------------------------- -->
-                    <!--  Mobilenavbar -->
-                    <div class="offcanvas offcanvas-start pt-0" data-bs-scroll="true" tabindex="-1" id="mobilenavbar" aria-labelledby="offcanvasWithBothOptionsLabel">
-                        <nav class="sidebar-nav scroll-sidebar">
-                            <div class="offcanvas-header justify-content-between">
-                                <a href="index.html" class="text-nowrap logo-img">
-                                    <img src="assets/images/logos/logo-icon.svg" alt="Logo">
-                                </a>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
-                             
-                        </nav>
-                    </div>
 
                 </div>
                 <div class="app-header with-horizontal">
@@ -414,7 +400,7 @@
                                     <iconify-icon icon="solar:magnifer-linear" class="fs-6"></iconify-icon>
                                 </a>
                             </li>
-                             
+
                         </ul>
                         <div class="d-block d-xl-none">
                             <a href="index.html" class="text-nowrap nav-link">
@@ -447,6 +433,8 @@
                                             <iconify-icon icon="solar:magnifer-line-duotone" class="fs-6"></iconify-icon>
                                         </a>
                                     </li>
+
+
 
                                     <!-- ------------------------------- -->
                                     <!-- start profile Dropdown -->
@@ -502,4 +490,56 @@
             </header>
             <!--  Header End -->
 
-         
+            <aside class="left-sidebar with-horizontal">
+                <!-- Sidebar scroll-->
+                <div>
+                    <!-- Sidebar navigation-->
+                    <nav id="sidebarnavh" class="sidebar-nav scroll-sidebar container-fluid">
+                        <ul id="sidebarnav">
+                            <!-- ============================= -->
+                            <!-- Home -->
+                            <!-- ============================= -->
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                <span class="hide-menu">Home</span>
+                            </li>
+                            <!-- =================== -->
+                            <!-- Dashboard -->
+                            <!-- =================== -->
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                    <span>
+                                        <iconify-icon icon="solar:layers-line-duotone" class="ti"></iconify-icon>
+                                    </span>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item">
+                                        <a href="index.html" class="sidebar-link">
+                                            <i class="ti ti-aperture"></i>
+                                            <span class="hide-menu">Dashboard 1</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a href="index2.html" class="sidebar-link">
+                                            <i class="ti ti-shopping-cart"></i>
+                                            <span class="hide-menu">Dashboard 2</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a href="index3.html" class="sidebar-link">
+                                            <i class="ti ti-atom"></i>
+                                            <span class="hide-menu">Dashboard 3</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        </li>
+                        </ul>
+                    </nav>
+                    <!-- End Sidebar navigation -->
+                </div>
+                <!-- End Sidebar scroll-->
+            </aside>
