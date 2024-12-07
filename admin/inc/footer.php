@@ -252,15 +252,8 @@
 </div>
 <div class="dark-transparent sidebartoggler"></div>
 <!-- Import Js Files -->
-<script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/libs/simplebar/dist/simplebar.min.js"></script>
-<script src="assets/js/theme/app.init.js"></script>
-<script src="assets/js/theme/theme.js"></script>
-<script src="assets/js/theme/app.min.js"></script>
-<script src="assets/js/theme/sidebarmenu.js"></script>
 
 
-<script src="assets/js/vendor.min.js"></script>
 <!-- Import Js Files -->
 <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/libs/simplebar/dist/simplebar.min.js"></script>
@@ -273,16 +266,10 @@
 <script src="npm/iconify-icon%401.0.8/dist/iconify-icon.min.js"></script>
 <script src="assets/libs/apexcharts/dist/apexcharts.min.js"></script>
 <script src="assets/js/dashboards/dashboard1.js"></script>
-<script src="assets/js/datatable/datatable-advanced.init.js"></script>
 <script src="assets/libs/fullcalendar/index.global.min.js"></script>
-
-<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="buttons/2.4.2/js/dataTables.buttons.min.js"></script>
-<script src="ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="buttons/2.4.2/js/buttons.html5.min.js"></script>
-<script src="buttons/2.4.2/js/buttons.print.min.js"></script>
+<script src="assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
+  <script src="assets/js/forms/sweet-alert.init.js"></script>
+ 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>

@@ -51,15 +51,12 @@ include("inc/header.php");
                                         <tr>
                                             <th>S.No</th>
                                             <th>Category Name</th>
+                                            <th>Status</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>System Architect</td>
-                                            <td>Delete</td>
-                                        </tr>
+                                    <tbody id="loadCategoryData">
+
                                     </tbody>
 
                                 </table>
@@ -86,12 +83,12 @@ include("inc/header.php");
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center">
                 <h4 class="modal-title" id="exampleModalLabel1">
-                    New message
+                    Add Category
                 </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close addmodelclose" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="">
+                <form id="categoryDataSubmit">
                     <div class="mb-3">
                         <label for="recipient-name" class="">Category Name:</label>
                         <input type="text" name="category_name" class="form-control" id="recipient-name1">
@@ -119,3 +116,113 @@ include("inc/header.php");
 include("inc/footer.php");
 
 ?>
+
+<script>
+    let loadCategoryData = function() {
+        $.ajax({
+            url: 'query.php',
+            type: 'POST',
+            data: {
+                loadCategoryData: 1
+            },
+            success: function(data) {
+                $('#loadCategoryData').html(data);
+            }
+        })
+    }
+    loadCategoryData();
+    $('#categoryDataSubmit').on('submit', function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+
+        $.ajax({
+            url: 'query.php',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+
+                if (response == 1) {
+                    // alert("Data added successfully.");
+                    $('#categoryDataSubmit').trigger('reset');
+                    $('.addmodelclose').click();
+                    Swal.fire(
+                        "Data added successfully.",
+                        "",
+                        "success"
+                    );
+
+                    loadCategoryData();
+                } else {
+                    alert("Failed to add data.");
+                }
+            },
+            error: function(err) {
+                console.log(err);
+                alert("There was an error uploading the file.");
+            }
+        });
+    });
+    $(document).on('click', '.messageDeleteById', function() {
+        if (confirm('Are you want to delete')) {
+            let id = $(this).data('id');
+            img = $(this).data('deleteimg');
+            $.ajax({
+                url: "query.php",
+                type: "POST",
+                data: {
+                    deleteMessageById: id,
+                    deleteMessageImg: img
+                },
+                success: function(data) {
+                    if (data == 1) {
+                        alert("Data deleted successfully.");
+                        loadMessageData();
+                    } else {
+                        alert("Failed to delete data.");
+                    }
+                }
+            })
+        }
+    });
+    $(document).on('click', '.messageEditById', function() {
+        let id = $(this).data('id');
+        $.ajax({
+            url: "query.php",
+            type: "POST",
+            data: {
+                loadMessageEditForm: id
+            },
+            success: function(data) {
+                // alert(data);
+                data = JSON.parse(data);
+                $('#messageEditId').val(data.id);
+                $('.newMessageHeading').val(data.heading);
+                $('.newMessageTitle').val(data.title);
+                $('.newMessageDescription').val(data.description);
+                $('.carouselImage').attr('src', 'uploads/' + data.Image);
+            }
+        });
+    });
+    $('#UpdateMessageForm').on('submit', function(e) {
+        e.preventDefault();
+        let formdata = new FormData(this);
+        $.ajax({
+            url: "query.php",
+            type: "POST",
+            data: formdata,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                // alert("Server Response: " + data);
+                if (data == 1) {
+                    alert("Updated Successfully");
+                    $('#UpdateMessageForm').trigger('reset');
+                    $('.close').click();
+                    loadMessageData();
+                }
+            }
+        })
+    });
+</script>
