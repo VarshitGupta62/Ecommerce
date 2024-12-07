@@ -1,233 +1,464 @@
-<?php
-include("../admin/config.php");
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
 <head>
-     <!-- Title Meta -->
-     <meta charset="utf-8" />
-     <title>Dakshayni Hand Craft</title>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="description" content="A fully responsive premium admin dashboard template" />
-     <meta name="author" content="Techzaa" />
-     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <!-- App favicon -->
-     <?php
-     // Query to fetch data
-     $query = "SELECT  * FROM settings where setting_key = 'favicon'";
-     $result = mysqli_query($conn, $query) or die('Query Failed: ' . mysqli_error($conn));
+    <!-- Favicon icon-->
+    <link rel="shortcut icon" type="image/png" href="assets/images/logos/favicon.png">
 
-     if (mysqli_num_rows($result) > 0) {
-          // Output data of each row
-          while ($row = mysqli_fetch_assoc($result)) {
-               echo "
-                        <link rel='shortcut icon' href='uploads/$row[setting_value]'>
-                        ";
-          }
-     } else {
-          echo "Image not found.";
-     } ?>
-     <!-- <link rel="shortcut icon" href="../assets/img/bharati.jpg"> -->
+    <!-- Core Css -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="buttons/2.4.2/css/buttons.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css"> -->
 
-     <!-- Vendor css (Require in all Page) -->
-     <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
-
-     <!-- Icons css (Require in all Page) -->
-     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-
-     <!-- App css (Require in all Page) -->
-     <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" />
-
-     <!-- Theme Config js (Require in all Page) -->
-     <script src="assets/js/config.js"></script>
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>Dakshayni Hand Craft</title>
 </head>
-<style>
- .avatar {
-  width: 46px;  /* Adjust width as needed */
-  height: 44px; /* Maintain aspect ratio */
-  object-fit: contain; /* Ensures the entire image fits inside the box */
-  background-color:  gainsboro ;
-}
 
-</style>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="assets/images/logos/favicon.png" alt="loader" class="lds-ripple img-fluid">
+    </div>
+    <div id="main-wrapper">
+        <!-- Sidebar Start -->
+        <aside class="side-mini-panel with-vertical">
+            <!-- ---------------------------------- -->
+            <!-- Start Vertical Layout Sidebar -->
+            <!-- ---------------------------------- -->
+            <div class="iconbar">
+                <div>
+                    <div class="mini-nav">
+                        <div class="brand-logo d-flex align-items-center justify-content-center">
+                            <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
+                                <iconify-icon icon="solar:hamburger-menu-line-duotone" class="fs-7"></iconify-icon>
+                            </a>
+                        </div>
+                        <ul class="mini-nav-ul" data-simplebar="">
 
-     <!-- START Wrapper -->
-     <div class="wrapper">
+                            <!-- --------------------------------------------------------------------------------------------------------- -->
+                            <!-- Dashboards -->
+                            <!-- --------------------------------------------------------------------------------------------------------- -->
+                            <li class="mini-nav-item" id="mini-1">
+                                <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="right" data-bs-title="Dashboards">
+                                    <iconify-icon icon="solar:layers-line-duotone" class="fs-7"></iconify-icon>
+                                </a>
+                            </li>
 
-          <!-- ========== Topbar Start ========== -->
-          <header class="topbar">
-               <div class="container-fluid">
-                    <div class="navbar-header">
-                         <div class="d-flex align-items-center">
-                              <!-- Menu Toggle Button -->
-                              <div class="topbar-item">
-                                   <button type="button" class="button-toggle-menu me-2">
-                                        <iconify-icon icon="solar:hamburger-menu-broken" class="fs-24 align-middle"></iconify-icon>
-                                   </button>
-                              </div>
+                        </ul>
 
-                              <!-- Menu Toggle Button -->
-                              <div class="topbar-item">
-                                   <h4 class="fw-bold topbar-button pe-none text-uppercase mb-0">Welcome Admin!</h4>
-                              </div>
-                         </div>
-
-                         <div class="d-flex align-items-center gap-1">
-
-                              <!-- Theme Color (Light/Dark) -->
-                              <div class="topbar-item">
-                                   <button type="button" class="topbar-button" id="light-dark-mode">
-                                        <iconify-icon icon="solar:moon-bold-duotone" class="fs-24 align-middle"></iconify-icon>
-                                   </button>
-                              </div>
-
-                              <!-- User -->
-                              <div class="dropdown topbar-item">
-                                   <a type="button" class="topbar-button" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="d-flex align-items-center">
-                                        <img class="rounded-circle avatar" src="assets/download.png" alt="avatar-3">
+                    </div>
+                    <div class="sidebarmenu">
+                        <!-- <div class="brand-logo d-flex align-items-center nav-logo">
+                            <a href="index.html" class="text-nowrap logo-img">
+                                <img src="assets/images/logos/logo.svg" alt="Logo">
+                            </a>
+                        </div> -->
+                        <!-- ---------------------------------- -->
+                        <!-- Dashboard -->
+                        <!-- ---------------------------------- -->
+                        <nav class="sidebar-nav" id="menu-right-mini-1" data-simplebar="">
+                            <ul class="sidebar-menu" id="sidebarnav">
+                                <!-- ---------------------------------- -->
+                                <!-- Home -->
+                                <!-- ---------------------------------- -->
+                                <li class="nav-small-cap">
+                                    <span class="hide-menu">Admin</span>
+                                </li>
+                                <!-- ---------------------------------- -->
+                                <!-- Dashboard -->
+                                <!-- ---------------------------------- -->
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="" id="get-url" aria-expanded="false">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span class="hide-menu">Dashboard</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                        <span class="rounded-3">
+                                            <i class="fas fa-cogs"></i>
                                         </span>
-                                   </a>
-                                   <div class="dropdown-menu dropdown-menu-end">
-                                        <!-- item-->
-                                        <h6 class="dropdown-header">Welcome Admin!</h6>
+                                        <span class="hide-menu"> Shop Setting </span>
+                                    </a>
+                                    <ul aria-expanded="false" class="collapse first-level">
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="category.php" aria-expanded="false">
+                                                <span class="rounded-3">
+                                                    <i class="fas fa-th-list"></i>
+                                                </span>
+                                                <span class="hide-menu">Category</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link sidebar-link" href="subcategory.php" aria-expanded="false">
+                                                <span class="rounded-3">
+                                                    <i class="fas fa-list-ul"></i>
+                                                </span>
+                                                <span class="hide-menu">Sub-Category</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link sidebar-link" href="city.php" aria-expanded="false">
+                                                <span class="rounded-3">
+                                                    <i class="fas fa-city"></i>
+                                                </span>
+                                                <span class="hide-menu">City</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link sidebar-link" href="shippingcost.php" aria-expanded="false">
+                                                <span class="rounded-3">
+                                                    <i class="fas fa-shipping-fast"></i>
+                                                </span>
+                                                <span class="hide-menu">Shipping Cost</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="productmanagement.php" id="get-url" aria-expanded="false">
+                                        <i class="fas fa-box-open"></i>
+                                        <span class="hide-menu">Product Management</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="ordermanagement.php" id="get-url" aria-expanded="false">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="hide-menu">Order Management</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="allcustomer.php" id="get-url" aria-expanded="false">
+                                        <i class="fas fa-users"></i>
+                                        <span class="hide-menu">All Customer</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="pagesetting.php" id="get-url" aria-expanded="false">
+                                        <i class="fas fa-cog"></i>
+                                        <span class="hide-menu">Page Setting</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="websitesetting.php" id="get-url" aria-expanded="false">
+                                        <i class="fas fa-tools"></i>
+                                        <span class="hide-menu">Website Setting</span>
+                                    </a>
+                                </li>
 
-                                        <a class="dropdown-item text-danger" href="logout.php">
-                                             <i class="bx bx-log-out fs-18 align-middle me-1"></i><span class="align-middle">Logout</span>
+                            </ul>
+                        </nav>
+
+                        <!-- ---------------------------------- -->
+                        <!-- Pages -->
+                        <!-- ---------------------------------- -->
+
+
+
+
+
+                        <!-- ---------------------------------- -->
+                        <!-- Forms -->
+                        <!-- ---------------------------------- -->
+
+
+                        <!-- ---------------------------------- -->
+                        <!-- Tables -->
+                        <!-- ---------------------------------- -->
+
+
+                        <!-- ---------------------------------- -->
+                        <!-- Charts -->
+                        <!-- ---------------------------------- -->
+
+
+                        <!-- ---------------------------------- -->
+                        <!-- Ui Components -->
+                        <!-- ---------------------------------- -->
+
+
+                        <!-- ---------------------------------- -->
+                        <!-- Comoponents -->
+                        <!-- ---------------------------------- -->
+
+
+                        <!-- ---------------------------------- -->
+                        <!-- Auth Pages -->
+                        <!-- ---------------------------------- -->
+
+
+                        <!-- ---------------------------------- -->
+                        <!-- Docs & Other -->
+                        <!-- ---------------------------------- -->
+
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!--  Sidebar End -->
+        <div class="page-wrapper">
+            <!--  Header Start -->
+            <header class="topbar">
+                <div class="with-vertical">
+                    <!-- ---------------------------------- -->
+                    <!-- Start Vertical Layout Header -->
+                    <!-- ---------------------------------- -->
+                    <nav class="navbar navbar-expand-lg p-0">
+                        <ul class="navbar-nav">
+                            <li class="nav-item d-flex d-xl-none">
+                                <a class="nav-link nav-icon-hover-bg rounded-circle  sidebartoggler " id="headerCollapse" href="javascript:void(0)">
+                                    <iconify-icon icon="solar:hamburger-menu-line-duotone" class="fs-6"></iconify-icon>
+                                </a>
+                            </li>
+
+                            <li class="nav-item d-none d-lg-flex dropdown nav-icon-hover-bg rounded-circle">
+                                <div class="hover-dd">
+                                    <div class="dropdown-menu dropdown-menu-nav dropdown-menu-animate-up py-0 overflow-hidden" aria-labelledby="drop2">
+                                        <div class="position-relative">
+                                            <div class="row">
+
+                                                <div class="col-4 d-none d-lg-flex">
+                                                    <img src="assets/images/backgrounds/mega-dd-bg.jpg" alt="mega-dd" class="img-fluid mega-dd-bg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="d-block d-lg-none py-9 py-xl-0">
+                            <img src="assets/images/logos/logo.svg" alt="matdash-img">
+                        </div>
+                        <a class="navbar-toggler p-0 border-0 nav-icon-hover-bg rounded-circle" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <iconify-icon icon="solar:menu-dots-bold-duotone" class="fs-6"></iconify-icon>
+                        </a>
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <ul class="navbar-nav flex-row mx-auto ms-lg-auto align-items-center justify-content-center">
+                                    <li class="nav-item dropdown">
+                                        <a href="javascript:void(0)" class="nav-link nav-icon-hover-bg rounded-circle d-flex d-lg-none align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar" aria-controls="offcanvasWithBothOptions">
+                                            <iconify-icon icon="solar:sort-line-duotone" class="fs-6"></iconify-icon>
                                         </a>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-               </div>
-          </header>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link moon dark-layout nav-icon-hover-bg rounded-circle" href="javascript:void(0)">
+                                            <iconify-icon icon="solar:moon-line-duotone" class="moon fs-6"></iconify-icon>
+                                        </a>
+                                        <a class="nav-link sun light-layout nav-icon-hover-bg rounded-circle" href="javascript:void(0)" style="display: none">
+                                            <iconify-icon icon="solar:sun-2-line-duotone" class="sun fs-6"></iconify-icon>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item d-block d-xl-none">
+                                        <a class="nav-link nav-icon-hover-bg rounded-circle" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <iconify-icon icon="solar:magnifer-line-duotone" class="fs-6"></iconify-icon>
+                                        </a>
+                                    </li>
 
-          <!-- Activity Timeline -->
-          <div>
-               <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="theme-activity-offcanvas" style="max-width: 450px; width: 100%;">
-                    <div class="d-flex align-items-center bg-primary p-3 offcanvas-header">
-                         <h5 class="text-white m-0 fw-semibold">Activity Stream</h5>
-                         <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
 
-                    <div class="offcanvas-body p-0">
-                         <div data-simplebar class="h-100 p-4">
-                              <div class="position-relative ms-2">
-                                   <span class="position-absolute start-0  top-0 border border-dashed h-100"></span>
-                                   <div class="position-relative ps-4">
-                                        <div class="mb-4">
-                                             <span class="position-absolute start-0 avatar-sm translate-middle-x bg-danger d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-20"><iconify-icon icon="iconamoon:folder-check-duotone"></iconify-icon></span>
-                                             <div class="ms-2">
-                                                  <h5 class="mb-1 text-dark fw-semibold fs-15 lh-base">Report-Fix / Update </h5>
-                                                  <p class="d-flex align-items-center">Add 3 files to <span class=" d-flex align-items-center text-primary ms-1"><iconify-icon icon="iconamoon:file-light"></iconify-icon> Tasks</span></p>
-                                                  <div class="bg-light bg-opacity-50 rounded-2 p-2">
-                                                       <div class="row">
-                                                            <div class="col-lg-6 border-end border-light">
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <i class="bx bxl-figma fs-20 text-red"></i>
-                                                                      <a href="#!" class="text-dark fw-medium">Concept.fig</a>
-                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                 <div class="d-flex align-items-center gap-2">
-                                                                      <i class="bx bxl-file-doc fs-20 text-success"></i>
-                                                                      <a href="#!" class="text-dark fw-medium">larkon.docs</a>
-                                                                 </div>
-                                                            </div>
-                                                       </div>
-                                                  </div>
-                                                  <h6 class="mt-2 text-muted">Monday , 4:24 PM</h6>
-                                             </div>
+
+
+
+                                    <!-- ------------------------------- -->
+                                    <!-- start profile Dropdown -->
+                                    <!-- ------------------------------- -->
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" href="javascript:void(0)" id="drop1" aria-expanded="false">
+                                            <div class="d-flex align-items-center gap-2 lh-base">
+                                                <img src="assets/images/profile/user-1.jpg" class="rounded-circle" width="35" height="35" alt="matdash-img">
+                                                <iconify-icon icon="solar:alt-arrow-down-bold" class="fs-2"></iconify-icon>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu profile-dropdown dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop1">
+                                            <div class="position-relative px-4 pt-3 pb-2">
+                                                <div class="d-flex align-items-center mb-3 pb-3 border-bottom gap-6">
+                                                    <img src="assets/images/profile/user-1.jpg" class="rounded-circle" width="56" height="56" alt="matdash-img">
+                                                    <div>
+                                                        <h5 class="mb-0 fs-12">David McMichael <span class="text-success fs-11">Pro</span>
+                                                        </h5>
+                                                        <p class="mb-0 text-dark">
+                                                            david@wrappixel.com
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
-                                   </div>
-                                   <div class="position-relative ps-4">
-                                        <div class="mb-4">
-                                             <span class="position-absolute start-0 avatar-sm translate-middle-x bg-success d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-20"><iconify-icon icon="iconamoon:check-circle-1-duotone"></iconify-icon></span>
-                                             <div class="ms-2">
-                                                  <h5 class="mb-1 text-dark fw-semibold fs-15 lh-base">Project Status
-                                                  </h5>
-                                                  <p class="d-flex align-items-center mb-0">Marked<span class=" d-flex align-items-center text-primary mx-1"><iconify-icon icon="iconamoon:file-light"></iconify-icon> Design </span> as <span class="badge bg-success-subtle text-success px-2 py-1 ms-1"> Completed</span></p>
-                                                  <div class="d-flex align-items-center gap-3 mt-1 bg-light bg-opacity-50 p-2 rounded-2">
-                                                       <a href="#!" class="fw-medium text-dark">UI/UX Figma Design</a>
-                                                       <div class="ms-auto">
-                                                            <a href="#!" class="fw-medium text-primary fs-18" data-bs-toggle="tooltip" data-bs-title="Download" data-bs-placement="bottom"><iconify-icon icon="iconamoon:cloud-download-duotone"></iconify-icon></a>
-                                                       </div>
-                                                  </div>
-                                                  <h6 class="mt-3 text-muted">Monday , 3:00 PM</h6>
-                                             </div>
+                                    </li>
+                                    <!-- ------------------------------- -->
+                                    <!-- end profile Dropdown -->
+                                    <!-- ------------------------------- -->
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- ---------------------------------- -->
+                    <!-- End Vertical Layout Header -->
+                    <!-- ---------------------------------- -->
+
+
+                </div>
+                <div class="app-header with-horizontal">
+                    <nav class="navbar navbar-expand-xl container-fluid p-0">
+                        <ul class="navbar-nav align-items-center">
+                            <li class="nav-item d-flex d-xl-none">
+                                <a class="nav-link sidebartoggler nav-icon-hover-bg rounded-circle" id="sidebarCollapse" href="javascript:void(0)">
+                                    <iconify-icon icon="solar:hamburger-menu-line-duotone" class="fs-7"></iconify-icon>
+                                </a>
+                            </li>
+                            <li class="nav-item d-none d-xl-flex align-items-center">
+                                <a href="index.html" class="text-nowrap nav-link">
+                                    <img src="assets/images/logos/logo.svg" alt="matdash-img">
+                                </a>
+                            </li>
+
+
+                        </ul>
+                        <div class="d-block d-xl-none">
+                            <a href="index.html" class="text-nowrap nav-link">
+                                <img src="assets/images/logos/logo.svg" alt="matdash-img">
+                            </a>
+                        </div>
+                        <a class="navbar-toggler nav-icon-hover p-0 border-0 nav-icon-hover-bg rounded-circle" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="p-2">
+                                <i class="ti ti-dots fs-7"></i>
+                            </span>
+                        </a>
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                            <div class="d-flex align-items-center justify-content-between px-0 px-xl-8">
+                                <ul class="navbar-nav flex-row mx-auto ms-lg-auto align-items-center justify-content-center">
+                                    <li class="nav-item dropdown">
+                                        <a href="javascript:void(0)" class="nav-link nav-icon-hover-bg rounded-circle d-flex d-lg-none align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar" aria-controls="offcanvasWithBothOptions">
+                                            <iconify-icon icon="solar:sort-line-duotone" class="fs-6"></iconify-icon>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-icon-hover-bg rounded-circle moon dark-layout" href="javascript:void(0)">
+                                            <iconify-icon icon="solar:moon-line-duotone" class="moon fs-6"></iconify-icon>
+                                        </a>
+                                        <a class="nav-link nav-icon-hover-bg rounded-circle sun light-layout" href="javascript:void(0)" style="display: none">
+                                            <iconify-icon icon="solar:sun-2-line-duotone" class="sun fs-6"></iconify-icon>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item d-block d-xl-none">
+                                        <a class="nav-link nav-icon-hover-bg rounded-circle" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <iconify-icon icon="solar:magnifer-line-duotone" class="fs-6"></iconify-icon>
+                                        </a>
+                                    </li>
+
+
+
+                                    <!-- ------------------------------- -->
+                                    <!-- start profile Dropdown -->
+                                    <!-- ------------------------------- -->
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link" href="javascript:void(0)" id="drop1" aria-expanded="false">
+                                            <div class="d-flex align-items-center gap-2 lh-base">
+                                                <img src="assets/images/profile/user-1.jpg" class="rounded-circle" width="35" height="35" alt="matdash-img">
+                                                <iconify-icon icon="solar:alt-arrow-down-bold" class="fs-2"></iconify-icon>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu profile-dropdown dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop1">
+                                            <div class="position-relative px-4 pt-3 pb-2">
+                                                <div class="d-flex align-items-center mb-3 pb-3 border-bottom gap-6">
+                                                    <img src="assets/images/profile/user-1.jpg" class="rounded-circle" width="56" height="56" alt="matdash-img">
+                                                    <div>
+                                                        <h5 class="mb-0 fs-12">David McMichael <span class="text-success fs-11">Pro</span>
+                                                        </h5>
+                                                        <p class="mb-0 text-dark">
+                                                            david@wrappixel.com
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="message-body">
+                                                    <a href="page-user-profile.html" class="p-2 dropdown-item h6 rounded-1">
+                                                        My Profile
+                                                    </a>
+                                                    <a href="page-pricing.html" class="p-2 dropdown-item h6 rounded-1">
+                                                        My Subscription
+                                                    </a>
+                                                    <a href="app-invoice.html" class="p-2 dropdown-item h6 rounded-1">
+                                                        My Invoice <span class="badge bg-danger-subtle text-danger rounded ms-8">4</span>
+                                                    </a>
+                                                    <a href="page-account-settings.html" class="p-2 dropdown-item h6 rounded-1">
+                                                        Account Settings
+                                                    </a>
+                                                    <a href="authentication-login2.html" class="p-2 dropdown-item h6 rounded-1">
+                                                        Sign Out
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
-                                   </div>
-                                   <div class="position-relative ps-4">
-                                        <div class="mb-4">
-                                             <span class="position-absolute start-0 avatar-sm translate-middle-x bg-primary d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-16">UI</span>
-                                             <div class="ms-2">
-                                                  <h5 class="mb-1 text-dark fw-semibold fs-15">Larkon Application UI v2.0.0 <span class="badge bg-primary-subtle text-primary px-2 py-1 ms-1"> Latest</span>
-                                                  </h5>
-                                                  <p>Get access to over 20+ pages including a dashboard layout, charts, kanban board, calendar, and pre-order E-commerce & Marketing pages.</p>
-                                                  <div class="mt-2">
-                                                       <a href="#!" class="btn btn-light btn-sm">Download Zip</a>
-                                                  </div>
-                                                  <h6 class="mt-3 text-muted">Monday , 2:10 PM</h6>
-                                             </div>
-                                        </div>
-                                   </div>
-                                   <div class="position-relative ps-4">
-                                        <div class="mb-4">
-                                             <span class="position-absolute start-0 translate-middle-x bg-success bg-gradient d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-20"><img src="assets/images/users/avatar-7.jpg" alt="avatar-5" class="avatar-sm rounded-circle"></span>
-                                             <div class="ms-2">
-                                                  <h5 class="mb-0 text-dark fw-semibold fs-15 lh-base">Alex Smith Attached Photos
-                                                  </h5>
-                                                  <div class="row g-2 mt-2">
-                                                       <div class="col-lg-4">
-                                                            <a href="#!">
-                                                                 <img src="assets/images/small/img-6.jpg" alt="" class="img-fluid rounded">
-                                                            </a>
-                                                       </div>
-                                                       <div class="col-lg-4">
-                                                            <a href="#!">
-                                                                 <img src="assets/images/small/img-3.jpg" alt="" class="img-fluid rounded">
-                                                            </a>
-                                                       </div>
-                                                       <div class="col-lg-4">
-                                                            <a href="#!">
-                                                                 <img src="assets/images/small/img-4.jpg" alt="" class="img-fluid rounded">
-                                                            </a>
-                                                       </div>
-                                                  </div>
-                                                  <h6 class="mt-3 text-muted">Monday 1:00 PM</h6>
-                                             </div>
-                                        </div>
-                                   </div>
-                                   <div class="position-relative ps-4">
-                                        <div class="mb-4">
-                                             <span class="position-absolute start-0 translate-middle-x bg-success bg-gradient d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-20"><img src="assets/images/users/avatar-6.jpg" alt="avatar-5" class="avatar-sm rounded-circle"></span>
-                                             <div class="ms-2">
-                                                  <h5 class="mb-0 text-dark fw-semibold fs-15 lh-base">Rebecca J. added a new team member
-                                                  </h5>
-                                                  <p class="d-flex align-items-center gap-1"><iconify-icon icon="iconamoon:check-circle-1-duotone" class="text-success"></iconify-icon> Added a new member to Front Dashboard</p>
-                                                  <h6 class="mt-3 text-muted">Monday 10:00 AM</h6>
-                                             </div>
-                                        </div>
-                                   </div>
-                                   <div class="position-relative ps-4">
-                                        <div class="mb-4">
-                                             <span class="position-absolute start-0 avatar-sm translate-middle-x bg-warning d-inline-flex align-items-center justify-content-center rounded-circle text-light fs-20"><iconify-icon icon="iconamoon:certificate-badge-duotone"></iconify-icon></span>
-                                             <div class="ms-2">
-                                                  <h5 class="mb-0 text-dark fw-semibold fs-15 lh-base">Achievements
-                                                  </h5>
-                                                  <p class="d-flex align-items-center gap-1 mt-1">Earned a <iconify-icon icon="iconamoon:certificate-badge-duotone" class="text-danger fs-20"></iconify-icon>" Best Product Award"</p>
-                                                  <h6 class="mt-3 text-muted">Monday 9:30 AM</h6>
-                                             </div>
-                                        </div>
-                                   </div>
-                              </div>
-                              <a href="#!" class="btn btn-outline-dark w-100">View All</a>
-                         </div>
-                    </div>
-               </div>
-          </div>
+                                    </li>
+                                    <!-- ------------------------------- -->
+                                    <!-- end profile Dropdown -->
+                                    <!-- ------------------------------- -->
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+            </header>
+            <!--  Header End -->
+
+            <aside class="left-sidebar with-horizontal">
+                <!-- Sidebar scroll-->
+                <div>
+                    <!-- Sidebar navigation-->
+                    <nav id="sidebarnavh" class="sidebar-nav scroll-sidebar container-fluid">
+                        <ul id="sidebarnav">
+                            <!-- ============================= -->
+                            <!-- Home -->
+                            <!-- ============================= -->
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                <span class="hide-menu">Home</span>
+                            </li>
+                            <!-- =================== -->
+                            <!-- Dashboard -->
+                            <!-- =================== -->
+                            <li class="sidebar-item">
+                                <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                    <span>
+                                        <iconify-icon icon="solar:layers-line-duotone" class="ti"></iconify-icon>
+                                    </span>
+                                    <span class="hide-menu">Dashboard</span>
+                                </a>
+                                <ul aria-expanded="false" class="collapse first-level">
+                                    <li class="sidebar-item">
+                                        <a href="index.html" class="sidebar-link">
+                                            <i class="ti ti-aperture"></i>
+                                            <span class="hide-menu">Dashboard 1</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a href="index2.html" class="sidebar-link">
+                                            <i class="ti ti-shopping-cart"></i>
+                                            <span class="hide-menu">Dashboard 2</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a href="index3.html" class="sidebar-link">
+                                            <i class="ti ti-atom"></i>
+                                            <span class="hide-menu">Dashboard 3</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        </li>
+                        </ul>
+                    </nav>
+                    <!-- End Sidebar navigation -->
+                </div>
+                <!-- End Sidebar scroll-->
+            </aside>
