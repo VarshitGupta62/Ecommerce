@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if (!isset($_SESSION['adminUsername'])) {
+    header("Location: index.php");
+}
 include("inc/header.php");
 
 
@@ -50,6 +53,7 @@ include("inc/header.php");
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
+                                            <th>Navbar Name</th>
                                             <th>Category Name</th>
                                             <th>Status</th>
                                             <th>Delete</th>
@@ -87,22 +91,31 @@ include("inc/header.php");
                 </h4>
                 <button type="button" class="btn-close addmodelclose" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form id="categoryDataSubmit">
+            <form id="categoryDataSubmit">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="">Navbar</label>
+                        <!-- <input type="number" name="category_id" class="form-control" id="recipient-name1"> -->
+                        <select name="navbar_id" class="select2 form-control">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-body">
                     <div class="mb-3">
                         <label for="recipient-name" class="">Category Name:</label>
                         <input type="text" name="category_name" class="form-control" id="recipient-name1">
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn bg-danger-subtle text-danger " data-bs-dismiss="modal">
-                    Close
-                </button>
-                <button type="submit" class="btn btn-secondary">
-                    Add
-                </button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-danger-subtle text-danger " data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn btn-secondary">
+                        Add
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -164,65 +177,84 @@ include("inc/footer.php");
             }
         });
     });
-    $(document).on('click', '.messageDeleteById', function() {
-        if (confirm('Are you want to delete')) {
-            let id = $(this).data('id');
-            img = $(this).data('deleteimg');
-            $.ajax({
-                url: "query.php",
-                type: "POST",
-                data: {
-                    deleteMessageById: id,
-                    deleteMessageImg: img
-                },
-                success: function(data) {
-                    if (data == 1) {
-                        alert("Data deleted successfully.");
-                        loadMessageData();
-                    } else {
-                        alert("Failed to delete data.");
-                    }
-                }
-            })
-        }
-    });
-    $(document).on('click', '.messageEditById', function() {
-        let id = $(this).data('id');
+    $(document).on('change', '.form-check-input', function() {
+        let categoryId = $(this).data('id');
+        let newStatus = $(this).is(':checked') ? 1 : 0;
+
         $.ajax({
             url: "query.php",
             type: "POST",
             data: {
-                loadMessageEditForm: id
+                updateCategoryStatus: true,
+                id: categoryId,
+                status: newStatus
             },
-            success: function(data) {
-                // alert(data);
-                data = JSON.parse(data);
-                $('#messageEditId').val(data.id);
-                $('.newMessageHeading').val(data.heading);
-                $('.newMessageTitle').val(data.title);
-                $('.newMessageDescription').val(data.description);
-                $('.carouselImage').attr('src', 'uploads/' + data.Image);
+            success: function(response) {
+                if (response.trim() === "1") {
+                    Swal.fire("Success!", "Category status updated successfully.", "success");
+                } else {
+                    Swal.fire("Error!", "Failed to update category status.", "error");
+                }
+            },
+            error: function() {
+                Swal.fire("Error!", "An error occurred while updating status.", "error");
+            },
+        });
+    });
+    $(document).on('click', '.categoryDeleteById', function() {
+        let id = $(this).data('id'); // Get the ID from data attribute
+        if (!id) {
+            alert("Invalid ID.");
+            return;
+        }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "query.php",
+                    type: "POST",
+                    data: {
+                        deletecategoryById: id
+                    },
+                    success: function(data) {
+                        if (data.trim() === "1") {
+                            Swal.fire("Deleted!", "The category has been deleted.", "success");
+                            loadCategoryData(); // Reload category data
+                        } else {
+                            Swal.fire("Error!", "Failed to delete the category.", "error");
+                        }
+                    },
+                    error: function() {
+                        Swal.fire("Error!", "An error occurred while deleting the category.", "error");
+                    },
+                });
             }
         });
     });
-    $('#UpdateMessageForm').on('submit', function(e) {
-        e.preventDefault();
-        let formdata = new FormData(this);
+
+    function loadNavbar() {
         $.ajax({
-            url: "query.php",
-            type: "POST",
-            data: formdata,
-            contentType: false,
-            processData: false,
+            url: "query.php", // Path to the PHP script
+            type: 'POST',
+            data: {
+                loadNavbar: 1
+            },
             success: function(data) {
-                // alert("Server Response: " + data);
-                if (data == 1) {
-                    alert("Updated Successfully");
-                    $('#UpdateMessageForm').trigger('reset');
-                    $('.close').click();
-                    loadMessageData();
-                }
-            }
-        })
-    });
+                // alert(data);
+                $("select[name='navbar_id']").html("<option value=''> Select</option>" + data);
+            },
+            error: function() {
+                Swal.fire("Error!", "Failed to load categories.", "error");
+            },
+        });
+    }
+    loadNavbar();
 </script>

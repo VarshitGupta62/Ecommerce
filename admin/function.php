@@ -180,3 +180,32 @@ function selectSingleParams($sql, $params = [], $param_types = '')
         return null;
     }
 }
+
+// This is the fetch function using MySQLi
+function fetch($sql, $values = [], $types = '') {
+    global $conn;  // Assuming $conn is your MySQLi connection
+
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        // Handle error in preparing statement
+        echo "Error in preparing the statement: " . $conn->error;
+        return false;
+    }
+
+    // Bind parameters if any
+    if ($values) {
+        $stmt->bind_param($types, ...$values);
+    }
+
+    // Execute the statement
+    $stmt->execute();
+
+    // Fetch the result
+    $result = $stmt->get_result()->fetch_assoc();  // Fetch associative array
+
+    return $result ? $result : false; // Return the fetched result or false if no result
+}
+
+

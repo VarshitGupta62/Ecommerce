@@ -1,315 +1,406 @@
 <?php
-
+session_start();
+if (!isset($_SESSION['adminUsername'])) {
+    header("Location: index.php");
+}
 include("inc/header.php");
-
-
 ?>
-
-
-
 
 <div class="body-wrapper">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-5">
-                <!-- -------------------------------------------- -->
-                <!-- Welcome Card -->
-                <!-- -------------------------------------------- -->
-                <div class="body-wrapper">
-                    <div class="container-fluid">
-                        <div class="card card-body py-3">
-                            <div class="row align-items-center">
-                                <div class="col-12">
-                                    <div class="d-sm-flex align-items-center justify-space-between">
-                                        <h4 class="mb-4 mb-sm-0 card-title">Add Product</h4>
-                                        <nav aria-label="breadcrumb" class="ms-auto">
-                                            <ol class="breadcrumb">
-                                                <li class="breadcrumb-item d-flex align-items-center">
-                                                    <a class="text-muted text-decoration-none d-flex" href="index.html">
-                                                        <iconify-icon icon="solar:home-2-line-duotone" class="fs-6"></iconify-icon>
-                                                    </a>
-                                                </li>
-                                                <li class="breadcrumb-item" aria-current="page">
-                                                    <span class="badge fw-medium fs-2 bg-primary-subtle text-primary">
-                                                        Add Product
-                                                    </span>
-                                                </li>
-                                            </ol>
-                                        </nav>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- start Basic Area Chart -->
-                        <div class="row">
-                            <div class="col-lg-8 ">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center mb-7">
-                                            <h4 class="card-title">General</h4>
-
-                                            <button class="navbar-toggler border-0 shadow-none d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                                <i class="ti ti-menu fs-5 d-flex"></i>
-                                            </button>
-                                        </div>
-                                        <form action="" class="form-horizontal">
-                                            <div class="mb-4">
-                                                <label class="form-label">Product Name <span class="text-danger">*</span>
-                                                </label>
-                                                <input type="text" class="form-control" value="Product Name">
-                                                <p class="fs-2">A product name is required and recommended to be unique.</p>
-                                            </div>
-                                            <div>
-                                                <label class="form-label">Description</label>
-                                                <div id="editor">
-                                                </div>
-                                                <p class="fs-2 mb-0">Set a description to the product for better visibility.</p>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-7">Media</h4>
-
-                                        <form action="#" class="dropzone dz-clickable mb-2">
-                                            <div class="dz-default dz-message">
-                                                <button class="dz-button" type="button">Drop files here
-                                                    to upload</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-7">Variation</h4>
-
-                                        <form action="">
-                                            <label class="form-label">Add Product Variations</label>
-                                            <div class="email-repeater mb-3">
-                                                <div data-repeater-list="repeater-group">
-                                                    <div data-repeater-item="" class="row mb-3">
-                                                        <div class="col-md-4">
-                                                            <select class="select2 form-control">
-                                                                <option>Color</option>
-                                                                <option selected="">Size</option>
-                                                                <option>Material</option>
-                                                                <option>Style</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-4 mt-3 mt-md-0">
-                                                            <input type="text" class="form-control" placeholder="Variation">
-                                                        </div>
-                                                        <div class="col-md-2 mt-3 mt-md-0">
-                                                            <button data-repeater-delete="" class="btn bg-danger-subtle text-danger" type="button">
-                                                                <i class="ti ti-x fs-5 d-flex"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button type="button" data-repeater-create="" class="btn bg-primary-subtle text-primary ">
-                                                    <span class="fs-4 me-1">+</span>
-                                                    Add another variation
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-7">Pricing</h4>
-
-                                        <form>
-                                            <div class="mb-7">
-                                                <label class="form-label">Base Price <span class="text-danger">*</span>
-                                                </label>
-                                                <input type="text" class="form-control" value="Product Price">
-                                                <p class="fs-2">Set the product price.</p>
-                                            </div>
-                                            <div class="mb-7">
-                                                <label class="form-label">Discount Type</label>
-                                                <nav>
-                                                    <div class="nav nav-tabs justify-content-between align-items-center gap-9" id="nav-tab" role="tablist">
-                                                        <label for="radio1" class="form-check-label form-check p-3  border gap-2 rounded-2 d-flex flex-fill justify-content-center cursor-pointer" id="customControlValidation2" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" aria-controls="nav-home">
-                                                            <input type="radio" class="form-check-input" name="new-products" id="radio1" checked="">
-                                                            <span class="fs-4 text-dark">No Discount</span>
-                                                        </label>
-                                                        <label for="radio2" class="form-check-label p-3 form-check border gap-2 rounded-2 d-flex flex-fill justify-content-center cursor-pointer" id="customControlValidation2" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" aria-controls="nav-profile">
-                                                            <input type="radio" class="form-check-input" name="new-products" id="radio2">
-                                                            <span class="fs-4 text-dark">Percentage %</span>
-                                                        </label>
-                                                        <label for="radio3" class="form-check-label form-check p-3 border gap-2 rounded-2 d-flex flex-fill justify-content-center cursor-pointer" id="customControlValidation2" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" aria-controls="nav-contact">
-                                                            <input type="radio" class="form-check-input" name="new-products" id="radio3">
-                                                            <span class="fs-4 text-dark">Fixed Price</span>
-                                                        </label>
-                                                    </div>
-                                                </nav>
-                                                <div class="tab-content" id="nav-tabContent">
-                                                    <div class="tab-pane fade mt-7" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                                                        <form class="mt-3">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Set Discount Percentage <span class="text-danger">*</span>
-                                                                </label>
-                                                                <input type="range" class="form-range" id="customRange1" min="0" max="100" step="10">
-                                                                <p class="fs-2">Set a percentage discount to be applied on this product.</p>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <div class="tab-pane fade mt-7" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-                                                        <div class="mb-7">
-                                                            <label class="form-label">Fixed Discounted Price <span class="text-danger">*</span>
-                                                            </label>
-                                                            <input type="text" class="form-control" placeholder="Discounted Price">
-                                                            <p class="fs-2">Set the discounted product price. The product will be reduced at the
-                                                                determined fixed price.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="mb-4">
-                                                        <label class="form-label">
-                                                            Tax Class <span class="text-danger">*</span>
-                                                        </label>
-                                                        <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                                                            <option selected="">Select an option</option>
-                                                            <option value="1">Tax Free</option>
-                                                            <option value="2">Taxable Goods</option>
-                                                            <option value="3">Downloadable Products</option>
-                                                        </select>
-                                                        <p class="fs-2">Set the product tax class.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="mb-4">
-                                                        <label class="form-label">VAT Amount (%) <span class="text-danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control" value="">
-                                                        <p class="fs-2">Set the product VAT about.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary">
-                                        Save changes
+        <div class="card card-body py-3">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <div class="d-sm-flex align-items-center justify-space-between">
+                        <h4 class="mb-4 mb-sm-0 card-title"> Add Product</h4>
+                        <nav aria-label="breadcrumb" class="ms-auto">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item" aria-current="page">
+                                    <button type="button" class="btn btn-rounded btn-secondary" data-bs-toggle="modal" data-bs-target="#product-modal">
+                                        Add Product
                                     </button>
-                                    <button type="button" class="btn bg-danger-subtle text-danger ms-6">
-                                        Cancel
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="offcanvas-md offcanvas-end overflow-auto" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="card-title mb-7">Thumbnail</h4>
-                                            <form action="#" class="dropzone dz-clickable mb-2">
-                                                <div class="dz-default dz-message">
-                                                    <button class="dz-button" type="button">Drop Thumbnail here
-                                                        to upload</button>
-                                                </div>
-                                            </form>
-                                            <p class="fs-2 text-center mb-0">
-                                                Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center justify-content-between mb-7">
-                                                <h4 class="card-title">Status</h4>
-                                                <div class="p-2 h-100 bg-success rounded-circle"></div>
-                                            </div>
-                                            <form action="" class="form-horizontal">
-                                                <div>
-                                                    <select class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect">
-                                                        <option selected="">Published</option>
-                                                        <option value="1">Draft</option>
-                                                        <option value="2">Sheduled</option>
-                                                        <option value="3">Inactive</option>
-                                                    </select>
-                                                    <p class="fs-2 mb-0">
-                                                        Set the product status.
-                                                    </p>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="card-title mb-7">Product Details</h4>
-                                            <div class="mb-3">
-                                                <label class="form-label">Categories</label>
-                                                <select class="select2 form-control" multiple="multiple">
-                                                    <option value="">Computer</option>
-                                                    <option value="">Watches</option>
-                                                    <option value="">Headphones</option>
-                                                    <option value="">Beauty</option>
-                                                    <option value="">Fashion</option>
-                                                    <option value="">Footwear</option>
-                                                </select>
-                                                <p class="fs-2 mb-0">
-                                                    Add product to a category.
-                                                </p>
-                                            </div>
-                                            <button type="button" class="btn bg-primary-subtle text-primary ">
-                                                <span class="fs-4 me-1">+</span>
-                                                Create New Category
-                                            </button>
-                                            <div class="mt-7">
-                                                <label class="form-label">Tags</label>
-                                                <select class="select2 form-control" multiple="multiple">
-                                                    <option value="">New</option>
-                                                    <option value="">trending</option>
-                                                    <option value="">Headphones</option>
-                                                    <option value="">Beauty</option>
-                                                    <option value="">Fashion</option>
-                                                    <option value="">Footwear</option>
-                                                </select>
-                                                <p class="fs-2 mb-0">
-                                                    Add product to a category.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="card-title mb-7">Product Template</h4>
-                                            <form action="" class="form-horizontal">
-                                                <div>
-                                                    <label class="form-label text-nowrap">Select a product template</label>
-                                                    <select class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect">
-                                                        <option selected="">Default Template</option>
-                                                        <option value="1">Fashion</option>
-                                                        <option value="2">Office Stationary</option>
-                                                        <option value="3">Electronics</option>
-                                                    </select>
-                                                    <p class="fs-2 mb-0">
-                                                        Assign a template from your current theme to define how a single product is displayed.
-                                                    </p>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end Basic Area Chart -->
+                                </li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="datatables">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mb-2">
+                                <h4 class="card-title mb-0">All Products</h4>
+                            </div>
+                            <div class="table-responsive" style="max-height: 400px; overflow-x: auto; overflow-y: auto;">
+                                <table id="file_export" class="table table-striped table-bordered display">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Subcategory</th>
+                                            <th>Product Name</th>
+                                            <th>Old Price (₹)</th>
+                                            <th>New Price (₹)</th>
+                                            <th>Description</th>
+                                            <th>Overview</th>
+                                            <th>Offer</th>
+                                            <th>Quantity</th>
+                                            <th>Status</th>
+                                            <th>Image</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="loadProductData">
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<?php
+<div class="modal fade" id="product-modal" tabindex="-1" aria-labelledby="exampleModalLabel1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-flex align-items-center">
+                <h4 class="modal-title" id="exampleModalLabel1">Add Product</h4>
+                <button type="button" class="btn-close addmodelclose" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="productForm">
+                <div class="modal-body">
+                    <!-- Subcategory -->
+                    <div class="mb-3">
+                        <label for="subcategory-id" class="form-label">Subcategory</label>
+                        <select name="subcategory_id" id="subcategory-id" class="form-control select2">
+                            <!-- Dynamic options -->
+                        </select>
+                    </div>
 
-include("inc/footer.php");
+                    <!-- Product Name -->
+                    <div class="mb-3">
+                        <label for="product-name" class="form-label">Product Name</label>
+                        <input type="text" name="product_name" id="product-name" class="form-control" required>
+                    </div>
 
-?>
+                    <!-- Old Price -->
+                    <div class="mb-3">
+                        <label for="old-price" class="form-label">Old Price (₹)</label>
+                        <input type="text" name="p_old_price" id="old-price" class="form-control" required>
+                    </div>
+
+                    <!-- New Price -->
+                    <div class="mb-3">
+                        <label for="new-price" class="form-label">New Price (₹)</label>
+                        <input type="text" name="p_new_price" id="new-price" class="form-control" required>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="mb-3">
+                        <label for="product-description" class="form-label">Description</label>
+                        <textarea name="p_description" id="product-description" class="form-control" rows="3" placeholder="Enter product description"></textarea>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" name="p_qty" id="quantity" class="form-control" required>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="mb-3">
+                        <label for="product-image" class="form-label">Product Image</label>
+                        <input type="file" name="p_image" id="product-image" class="form-control" required>
+                    </div>
+
+                    <!-- Overview -->
+                    <div class="mb-3">
+                        <label for="overview" class="form-label">Overview</label>
+                        <input type="text" name="p_overview" id="overview" class="form-control" placeholder="Enter overview">
+                    </div>
+
+                    <!-- Offer -->
+                    <div class="mb-3">
+                        <label for="offer" class="form-label">Offer</label>
+                        <input type="text" name="p_offer" id="offer" class="form-control">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-danger-subtle text-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-secondary">Add Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="product-modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-flex align-items-center">
+                <h4 class="modal-title" id="exampleModalLabel1">Edit Product</h4>
+                <button type="button" class="btn-close editmodelclose" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="EditproductForm">
+                <div class="modal-body">
+                    <!-- Subcategory -->
+                    <div class="mb-3">
+                        <label for="subcategory-id" class="form-label">Subcategory</label>
+                        <select name="new_subcategory_id" id="subcategory-id2" class="form-control select2  new_subcategory_id">
+                            <!-- Dynamic options -->
+                        </select>
+                    </div>
+
+                    <!-- Product Name -->
+                    <div class="mb-3">
+                        <label for="product-name" class="form-label">Product Name</label>
+                        <input type="text" name="new_product_name" id="product-name" class="form-control new_product_name" required>
+                    </div>
+
+                    <!-- Old Price -->
+                    <div class="mb-3">
+                        <label for="old-price" class="form-label">Old Price (₹)</label>
+                        <input type="text" name="new_p_old_price" id="old-price" class="form-control new_p_old_price" required>
+                    </div>
+
+                    <!-- New Price -->
+                    <div class="mb-3">
+                        <label for="new-price" class="form-label">New Price (₹)</label>
+                        <input type="text" name="new_p_new_price" id="new-price" class="form-control new_p_new_price" required>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="mb-3">
+                        <label for="product-description" class="form-label">Description</label>
+                        <textarea name="new_p_description" id="product-description" class="form-control new_p_description" rows="3" placeholder="Enter product description"></textarea>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" name="new_p_qty" id="quantity" class="form-control new_p_qty" required>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="mb-3">
+                        <label class="form-label">Current Image</label> <!-- Show current About image -->
+                        <div class="text-center">
+                            <img src='' class="carouselImage img-fluid rounded border" alt='Image not found' id="currentAboutImage" style="max-height: 200px; width: auto;">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product-image" class="form-label">New Image</label>
+                        <input type="file" name="new_p_image" id="product-image" class="form-control new_p_image" >
+                    </div>
+
+                    <!-- Overview -->
+                    <div class="mb-3">
+                        <label for="overview" class="form-label">Overview</label>
+                        <input type="text" name="new_p_overview" id="overview" class="form-control new_p_overview" placeholder="Enter overview">
+                    </div>
+
+                    <!-- Offer -->
+                    <div class="mb-3">
+                        <label for="offer" class="form-label">Offer</label>
+                        <input type="text" name="new_p_offer" id="offer" class="form-control new_p_offer">
+                    </div>
+                </div>
+
+                <input type="hidden" name="productDataId" id="productDataId" >
+
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-danger-subtle text-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-secondary">Save Change</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php include("inc/footer.php"); ?>
+
+<script>
+    function loadSubcategories() {
+        $.ajax({
+            url: "query.php",
+            type: 'POST',
+            data: {
+                loadSubcategories: 1
+            },
+            success: function(data) {
+                $("#subcategory-id").html("<option value=''>Select Subcategory</option>" + data);
+                $("#subcategory-id2").html("<option value=''>Select Subcategory</option>" + data);
+            },
+            error: function() {
+                Swal.fire("Error!", "Failed to load subcategories.", "error");
+            }
+        });
+    }
+
+    function loadProductData() {
+        $.ajax({
+            url: "query.php",
+            type: 'POST',
+            data: {
+                loadProductData: 1
+            },
+            success: function(data) {
+                $('#loadProductData').html(data);
+                // alert(data);
+            }
+        });
+    }
+
+    $("#productForm").on("submit", function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+
+        $.ajax({
+            url: "query.php",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                // alert(response);
+                if (response == 1) {
+                    $('#productForm').trigger("reset");
+                    $('.addmodelclose').click();
+                    Swal.fire("Success!", "Product added successfully.", "success");
+                    loadProductData();
+                } else {
+                    Swal.fire("Error!", "Failed to add product.", "error");
+                }
+            },
+            error: function() {
+                Swal.fire("Error!", "An error occurred.", "error");
+            }
+        });
+    });
+
+    $(document).on("click", ".deleteProduct", function() {
+        let id = $(this).data("id");
+        let img = $(this).data("deleteimg");
+
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "query.php",
+                    type: "POST",
+                    data: {
+                        deleteProductById: id,
+                        deleteProductByImg: img
+                    },
+                    success: function(response) {
+                        if (response == 1) {
+                            Swal.fire("Deleted!", "Product deleted successfully.", "success");
+                            loadProductData();
+                        } else {
+                            Swal.fire("Error!", "Failed to delete product.", "error");
+                        }
+                    },
+                    error: function() {
+                        Swal.fire("Error!", "An error occurred.", "error");
+                    }
+                });
+            }
+        });
+    });
+
+    $(document).on('click', '.loadEditForm', function() {
+        let id = $(this).data('id');
+        $.ajax({
+            url: "query.php",
+            type: "POST",
+            data: {
+                loadProductEditForm: id
+            },
+            success: function(response) {
+
+                // alert("response is "+response);
+                var data = JSON.parse(response);
+                $('#currentAboutImage').attr('src', 'uploads/' + data.p_image); // Display current About image
+                $('#productDataId').val(data.id);
+                $('.new_subcategory_id').val(data.subcategory_id);
+                $('.new_product_name').val(data.product_name);
+                $('.new_p_old_price').val(data.p_old_price);
+                $('.new_p_new_price').val(data.P_new_price);
+                $('.new_p_description').val(data.p_description);
+                $('.new_p_qty').val(data.p_qty);
+                $('.new_p_overview').val(data.p_overview);
+                $('.new_p_offer').val(data.p_offer);
+            }
+        });
+    });
+
+    $(document).on('change', '.form-check-input', function() {
+        let categoryId = $(this).data('id');
+        let newStatus = $(this).is(':checked') ? 1 : 0;
+
+        $.ajax({
+            url: "query.php",
+            type: "POST",
+            data: {
+                updateProductStatus: true,
+                id: categoryId,
+                status: newStatus
+            },
+            success: function(response) {
+                if (response.trim() === "1") {
+                    Swal.fire("Success!", "Category status updated successfully.", "success");
+                } else {
+                    Swal.fire("Error!", "Failed to update category status.", "error");
+                }
+            },
+            error: function() {
+                Swal.fire("Error!", "An error occurred while updating status.", "error");
+            },
+        });
+    });
+
+    $('#EditproductForm').on('submit', function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        // alert("button Click");
+        $.ajax({
+            url: "query.php",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                // alert(data);
+                if (data == 1) {
+                    alert("Updated Successfully");
+                    $('#EditproductForm').trigger('reset');
+                    $('.editmodelclose').click();
+                    loadProductData();
+                }else{
+                    alert("Failed to update");
+                }
+            }
+        });
+    });
+
+    loadSubcategories();
+    loadProductData();
+</script>

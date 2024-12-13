@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="buttons/2.4.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="assets/libs/sweetalert2/dist/sweetalert2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css"> -->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css"> -->
 
@@ -76,23 +79,31 @@
                                 <!-- Dashboard -->
                                 <!-- ---------------------------------- -->
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="dashboard.php" id="get-url" aria-expanded="false">
-                                        <i class="fas fa-tachometer-alt"></i>
+                                    <a class="sidebar-link" href="dashboard.php" aria-expanded="false">
+                                        <i class="fas fa-home"></i>
                                         <span class="hide-menu">Dashboard</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
                                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                                         <span class="rounded-3">
-                                            <i class="fas fa-cogs"></i>
+                                            <i class="fas fa-wrench"></i>
                                         </span>
-                                        <span class="hide-menu"> Shop Setting </span>
+                                        <span class="hide-menu"> Navbar Setting</span>
                                     </a>
                                     <ul aria-expanded="false" class="collapse first-level">
                                         <li class="sidebar-item">
+                                            <a class="sidebar-link" href="navbar.php" aria-expanded="false">
+                                                <span class="rounded-3">
+                                                    <i class="fas fa-bars"></i>
+                                                </span>
+                                                <span class="hide-menu">Navbar</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
                                             <a class="sidebar-link" href="category.php" aria-expanded="false">
                                                 <span class="rounded-3">
-                                                    <i class="fas fa-th-list"></i>
+                                                    <i class="fas fa-folder"></i>
                                                 </span>
                                                 <span class="hide-menu">Category</span>
                                             </a>
@@ -100,15 +111,25 @@
                                         <li class="sidebar-item">
                                             <a class="sidebar-link sidebar-link" href="subcategory.php" aria-expanded="false">
                                                 <span class="rounded-3">
-                                                    <i class="fas fa-list-ul"></i>
+                                                    <i class="fas fa-folder-open"></i>
                                                 </span>
                                                 <span class="hide-menu">Sub-Category</span>
                                             </a>
                                         </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                        <span class="rounded-3">
+                                            <i class="fas fa-store"></i>
+                                        </span>
+                                        <span class="hide-menu"> Shop Setting </span>
+                                    </a>
+                                    <ul aria-expanded="false" class="collapse first-level">
                                         <li class="sidebar-item">
                                             <a class="sidebar-link sidebar-link" href="city.php" aria-expanded="false">
                                                 <span class="rounded-3">
-                                                    <i class="fas fa-city"></i>
+                                                    <i class="fas fa-map-marker-alt"></i>
                                                 </span>
                                                 <span class="hide-menu">City</span>
                                             </a>
@@ -116,7 +137,7 @@
                                         <li class="sidebar-item">
                                             <a class="sidebar-link sidebar-link" href="shippingcost.php" aria-expanded="false">
                                                 <span class="rounded-3">
-                                                    <i class="fas fa-shipping-fast"></i>
+                                                    <i class="fas fa-truck"></i>
                                                 </span>
                                                 <span class="hide-menu">Shipping Cost</span>
                                             </a>
@@ -124,38 +145,38 @@
                                     </ul>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="productmanagement.php" id="get-url" aria-expanded="false">
-                                        <i class="fas fa-box-open"></i>
+                                    <a class="sidebar-link" href="productmanagement.php" aria-expanded="false">
+                                        <i class="fas fa-box"></i>
                                         <span class="hide-menu">Product Management</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="ordermanagement.php" id="get-url" aria-expanded="false">
-                                        <i class="fas fa-shopping-cart"></i>
+                                    <a class="sidebar-link" href="ordermanagement.php" aria-expanded="false">
+                                        <i class="fas fa-receipt"></i>
                                         <span class="hide-menu">Order Management</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="allcustomer.php" id="get-url" aria-expanded="false">
-                                        <i class="fas fa-users"></i>
+                                    <a class="sidebar-link" href="allcustomer.php" aria-expanded="false">
+                                        <i class="fas fa-address-book"></i>
                                         <span class="hide-menu">All Customer</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="pagesetting.php" id="get-url" aria-expanded="false">
-                                        <i class="fas fa-cog"></i>
+                                    <a class="sidebar-link" href="pagesetting.php" aria-expanded="false">
+                                        <i class="fas fa-tools"></i>
                                         <span class="hide-menu">Page Setting</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="websitesetting.php" id="get-url" aria-expanded="false">
-                                        <i class="fas fa-tools"></i>
+                                    <a class="sidebar-link" href="websitesetting.php" aria-expanded="false">
+                                        <i class="fas fa-cogs"></i>
                                         <span class="hide-menu">Website Setting</span>
                                     </a>
                                 </li>
-
                             </ul>
                         </nav>
+
 
                         <!-- ---------------------------------- -->
                         <!-- Pages -->
@@ -262,11 +283,6 @@
                                             <iconify-icon icon="solar:magnifer-line-duotone" class="fs-6"></iconify-icon>
                                         </a>
                                     </li>
-
-
-
-
-
                                     <!-- ------------------------------- -->
                                     <!-- start profile Dropdown -->
                                     <!-- ------------------------------- -->
@@ -277,16 +293,16 @@
                                                 <iconify-icon icon="solar:alt-arrow-down-bold" class="fs-2"></iconify-icon>
                                             </div>
                                         </a>
-                                        <div class="dropdown-menu profile-dropdown dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop1">
+                                        <div class="dropdown-menu   dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop1">
                                             <div class="position-relative px-4 pt-3 pb-2">
-                                                <div class="d-flex align-items-center mb-3 pb-3 border-bottom gap-6">
-                                                    <img src="assets/images/profile/user-1.jpg" class="rounded-circle" width="56" height="56" alt="matdash-img">
-                                                    <div>
-                                                        <h5 class="mb-0 fs-12">David McMichael <span class="text-success fs-11">Pro</span>
-                                                        </h5>
-                                                        <p class="mb-0 text-dark">
-                                                            david@wrappixel.com
-                                                        </p>
+                                                <div class="align-items-center ">
+                                                    <div class="message-body">
+                                                        <a href="page-user-profile.html" class="p-2 dropdown-item h6 rounded-1">
+                                                            My Profile
+                                                        </a>
+                                                        <a href="logout.php" class="p-2 dropdown-item h6 rounded-1">
+                                                            Sign Out
+                                                        </a>
                                                     </div>
                                                 </div>
 
@@ -427,7 +443,7 @@
                             <!-- Dashboard -->
                             <!-- =================== -->
                             <li class="sidebar-item">
-                                <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                                <a class="sidebar-link has-arrow" href="dashboard.php" aria-expanded="false">
                                     <span>
                                         <iconify-icon icon="solar:layers-line-duotone" class="ti"></iconify-icon>
                                     </span>
@@ -435,7 +451,7 @@
                                 </a>
                                 <ul aria-expanded="false" class="collapse first-level">
                                     <li class="sidebar-item">
-                                        <a href="index.html" class="sidebar-link">
+                                        <a href="dashboard.php" class="sidebar-link">
                                             <i class="ti ti-aperture"></i>
                                             <span class="hide-menu">Dashboard 1</span>
                                         </a>

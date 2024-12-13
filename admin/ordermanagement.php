@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if (!isset($_SESSION['adminUsername'])) {
+    header("Location: index.php");
+}
 include("inc/header.php");
  
 
