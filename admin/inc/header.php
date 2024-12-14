@@ -1,3 +1,9 @@
+<?php
+
+include("config.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
@@ -27,9 +33,9 @@
 
 <body>
     <!-- Preloader -->
-    <div class="preloader">
+    <!-- <div class="preloader">
         <img src="assets/images/logos/favicon.png" alt="loader" class="lds-ripple img-fluid">
-    </div>
+    </div> -->
     <div id="main-wrapper">
         <!-- Sidebar Start -->
         <aside class="side-mini-panel with-vertical">

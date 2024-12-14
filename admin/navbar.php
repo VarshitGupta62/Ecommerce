@@ -153,7 +153,7 @@ include("inc/footer.php");
                     $('#navbarDataSubmit').trigger('reset');
                     $('.addmodelclose').click();
                     Swal.fire(
-                        "Data added successfully.",
+                        "Navbar added successfully.",
                         "",
                         "success"
                     );

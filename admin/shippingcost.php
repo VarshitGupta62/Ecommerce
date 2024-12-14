@@ -179,19 +179,19 @@ include("inc/footer.php");
                     $('#shippingcostDataSubmit').trigger('reset');
                     $('.addmodelclose').click();
                     Swal.fire(
-                        "Data added successfully.",
+                        "Shipping-Cost added successfully.",
                         "",
                         "success"
                     );
 
                     loadshippingcostData();
                 } else {
-                    alert("Failed to add data.");
+                    alert("Failed to add Shipping-Cost.");
                 }
             },
             error: function(err) {
                 console.log(err);
-                alert("There was an error uploading the file.");
+                alert("There was an error Shipping-Cost.");
             }
         });
     });

@@ -24,32 +24,115 @@ if (isset($_POST['adminUsername'])) {
     }
 }
 
-
-if (isset($_FILES['faviconImage'])) {
-
-    $sqlSelect = "SELECT setting_value FROM settings WHERE setting_key = 'favicon';";
+ 
+// Handle logo update request
+if (isset($_FILES['logo'])) {
+    $sqlSelect = "SELECT logo FROM settings WHERE id = 1;";
     $currentImage = selectSingleParams($sqlSelect);
 
-    $image_name = rand() . rand() . time() . basename($_FILES["faviconImage"]["name"]);
+    $image_name = rand() . rand() . time() . basename($_FILES["logo"]["name"]);
 
-    if (move_uploaded_file($_FILES["faviconImage"]["tmp_name"], "uploads/" . $image_name)) {
-
+    if (move_uploaded_file($_FILES["logo"]["tmp_name"], "uploads/" . $image_name)) {
         if ($currentImage && file_exists("uploads/" . $currentImage)) {
             unlink("uploads/" . $currentImage);
         }
 
-        $sqlUpdate = "UPDATE settings SET setting_value = ? WHERE setting_key = 'favicon';";
+        $sqlUpdate = "UPDATE settings SET logo = ? WHERE id = 1;";
         $values = [$image_name];
         $param_types = 's';
 
         $result = updateIdAvaliable($sqlUpdate, $values, $param_types);
-        if ($result) {
-            echo 1; // Success
-        } else {
-            echo 0; // Failure
-        }
+        echo $result ? 1 : 0;
+    } else {
+        echo 0;
     }
 }
+
+// Handle favicon update request
+if (isset($_FILES['favicon'])) {
+    $sqlSelect = "SELECT favicon FROM settings WHERE id = 1;";
+    $currentImage = selectSingleParams($sqlSelect);
+
+    $image_name = rand() . rand() . time() . basename($_FILES["favicon"]["name"]);
+
+    if (move_uploaded_file($_FILES["favicon"]["tmp_name"], "uploads/" . $image_name)) {
+        if ($currentImage && file_exists("uploads/" . $currentImage)) {
+            unlink("uploads/" . $currentImage);
+        }
+
+        $sqlUpdate = "UPDATE settings SET favicon = ? WHERE id = 1;";
+        $values = [$image_name];
+        $param_types = 's';
+
+        $result = updateIdAvaliable($sqlUpdate, $values, $param_types);
+        echo $result ? 1 : 0;
+    } else {
+        echo 0;
+    }
+}
+
+// Handle logo data load request
+if (isset($_POST['loadLogoData'])) {
+    $sql = "SELECT logo FROM settings WHERE id = 1;";
+    $result = select($sql, [], '');
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        echo json_encode($row['logo']);
+    } else {
+        echo "Error loading logo.";
+    }
+}
+
+if (isset($_POST['loadFaviconData'])) {
+    $sql = "SELECT favicon FROM settings WHERE id = 1;";
+    $result = select($sql, [], '');
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        echo json_encode($row['favicon']);
+    } else {
+        echo "Error loading logo.";
+    }
+}
+
+if (isset($_POST['footer_about'])) {
+    $sqlUpdate = "UPDATE settings 
+                  SET footer_about = ?, 
+                      footer_copyright = ?, 
+                      contact_address = ?, 
+                      contact_phone = ?, 
+                      contact_email = ? ,
+                      footer_heading = ?
+                  WHERE id = 1;";
+    $values = [ $_POST['footer_about'], $_POST['footer_copyright'], $_POST['footer_contact_address'], $_POST['footer_contact_phone_number'], $_POST['footer_contact_email'] , $_POST['footer_heading'] ];
+    $param_types = 'ssssss';
+
+    $result = updateIdAvaliable($sqlUpdate, $values, $param_types);
+    echo $result ? 1 : 0;
+}
+
+if (isset($_POST['loadFooterData'])) {
+    // echo "this is server";
+    $sql = "SELECT footer_about , footer_copyright , contact_address , contact_phone ,  contact_email , footer_heading  FROM settings WHERE id = 1;";
+    $result = select($sql, [], ''); 
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        echo json_encode($row);
+    } else {
+        echo "Error loading logo.";
+    }
+}
+
+
+// Handle message settings update request
+if (isset($_POST['forget_password_message'], $_POST['thank_you_message'])) {
+    $sqlUpdate = "UPDATE settings SET forget_password_message = ?, thank_you_message = ? WHERE id = 1;";
+    $values = [$_POST['forget_password_message'], $_POST['thank_you_message']];
+    $param_types = 'ss';
+
+    $result = updateIdAvaliable($sqlUpdate, $values, $param_types);
+    echo $result ? 1 : 0;
+}
+
 
 if (isset($_FILES['settingLogo'])) {
 

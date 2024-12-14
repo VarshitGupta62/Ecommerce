@@ -4,6 +4,111 @@ include("inc/header.php");
 
 ?>
 
+<style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f9f9f9;
+            }
+            .product-section {
+                display: flex;
+                flex-direction: column;
+                max-width: 1200px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+            .image-gallery {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .main-image {
+                width: 100%;
+                max-width: 600px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+            .thumbnail-container {
+                display: flex;
+                gap: 10px;
+            }
+            .thumbnail {
+                width: 80px;
+                height: 80px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: border 0.3s;
+            }
+            .thumbnail:hover {
+                border: 2px solid #333;
+            }
+            .product-details {
+                padding: 20px;
+            }
+            .product-title {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            .product-price {
+                font-size: 28px;
+                color: #e63946;
+                margin-bottom: 15px;
+            }
+            .product-description {
+                font-size: 16px;
+                color: #555;
+                margin-bottom: 20px;
+            }
+            .product-overview {
+                margin-bottom: 20px;
+                font-size: 14px;
+                color: #333;
+            }
+            .button-container {
+                display: flex;
+                gap: 10px;
+            }
+            .button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s;
+            }
+            .add-to-cart {
+                background-color: #28a745;
+                color: #fff;
+            }
+            .add-to-cart:hover {
+                background-color: #218838;
+            }
+            .buy-now {
+                background-color: #007bff;
+                color: #fff;
+            }
+            .buy-now:hover {
+                background-color: #0056b3;
+            }
+            @media (min-width: 768px) {
+                .product-section {
+                    flex-direction: row;
+                    gap: 20px;
+                }
+                .product-details {
+                    flex: 1;
+                }
+                .image-gallery {
+                    flex: 1;
+                }
+            }
+        </style>
+
 
 
         <!-- Modal Search Start -->
@@ -41,11 +146,11 @@ include("inc/header.php");
 
     <div class="product-section">
         <div class="image-gallery">
-            <img src="./wood-img/bed1.jpg" alt="Product Image" class="main-image" id="mainImage">
+            <img src="wood-img/bed1.jpg" alt="Product Image" class="main-image" id="mainImage">
             <div class="thumbnail-container">
-                <img src="./wood-img/bed2.jpg" alt="" class="thumbnail" onclick="changeImage(this)">
-                <img src="./wood-img/bed3.jpg" alt="" class="thumbnail" onclick="changeImage(this)">
-                <img src="./wood-img/bed4.jpg" alt="" class="thumbnail" onclick="changeImage(this)">
+                <img src="wood-img/bed2.jpg" alt="" class="thumbnail" onclick="changeImage(this)">
+                <img src="wood-img/bed3.jpg" alt="" class="thumbnail" onclick="changeImage(this)">
+                <img src="wood-img/bed4.jpg" alt="" class="thumbnail" onclick="changeImage(this)">
             </div>
         </div>
         <div class="product-details">
@@ -85,24 +190,10 @@ include("inc/header.php");
             <div class="row g-4">
                 <div class="col-lg-3">
                     <a href="#">
-                        <h1 class="text-primary mb-0"><img src="./wood-img/Sheeshamwala_Logo_page-0001-removebg-preview.png" alt="" style="width: 100px;">
+                        <h1 class="text-primary mb-0"><img src="wood-img/Sheeshamwala_Logo_page-0001-removebg-preview.png" alt="" style="width: 100px;">
                         </h1>
                     </a>
                 </div>
-                <!-- <div class="col-lg-6">
-                    <div class="position-relative mx-auto">
-                        <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="email" placeholder="Your Email">
-                        <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Submit</button>
-                    </div>
-                </div> -->
-                <!-- <div class="col-lg-3">
-                    <div class="d-flex justify-content-end pt-3">
-                        <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div> -->
             </div>
         </div>
         <div class="row g-5">

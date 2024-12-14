@@ -180,19 +180,19 @@ include("inc/footer.php");
                     $('#subcategoryDataSubmit').trigger('reset');
                     $('.addmodelclose').click();
                     Swal.fire(
-                        "Data added successfully.",
+                        "Subcategory added successfully.",
                         "",
                         "success"
                     );
 
                     loadsubcategoryData();
                 } else {
-                    alert("Failed to add data.");
+                    alert("Failed to add Subcategory.");
                 }
             },
             error: function(err) {
                 console.log(err);
-                alert("There was an error uploading the file.");
+                alert("There was an error , Failed to add Subcategory.");
             }
         });
     });

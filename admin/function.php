@@ -2,11 +2,18 @@
 
 include('config.php');
 
-function select($sql, $values, $datatypes)
+function select($sql, $values = [], $datatypes = '')
 {
     $conn = $GLOBALS['conn'];
+
+    // Prepare the SQL query
     if ($readyquery = mysqli_prepare($conn, $sql)) {
-        mysqli_stmt_bind_param($readyquery, $datatypes, ...$values);
+        // Bind parameters only if there are values to bind
+        if (!empty($values) && !empty($datatypes)) {
+            mysqli_stmt_bind_param($readyquery, $datatypes, ...$values);
+        }
+
+        // Execute the statement
         if (mysqli_stmt_execute($readyquery)) {
             $result = mysqli_stmt_get_result($readyquery);
             mysqli_stmt_close($readyquery);
@@ -19,6 +26,7 @@ function select($sql, $values, $datatypes)
         die("Query Not Prepared - Select");
     }
 }
+
 
 function insert($sql, $values, $datatypes)
 {

@@ -161,7 +161,7 @@ include("inc/footer.php");
                     $('#categoryDataSubmit').trigger('reset');
                     $('.addmodelclose').click();
                     Swal.fire(
-                        "Data added successfully.",
+                        "Category added successfully.",
                         "",
                         "success"
                     );

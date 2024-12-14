@@ -58,7 +58,7 @@
                             <div class="mb-4">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <a class="text-primary link-dark fs-2" href="authentication-forgot-password2.html">Forgot Password?</a>
+                                    <!-- <a class="text-primary link-dark fs-2" href="authentication-forgot-password2.html">Forgot Password?</a> -->
                                 </div>
                                 <input type="password" name="adminPassword" class="form-control" id="exampleInputPassword1" placeholder="Enter your password">
                             </div>

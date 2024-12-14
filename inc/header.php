@@ -118,9 +118,9 @@ include("admin/config.php");
 <body>
 
     <!-- Spinner Start -->
-    <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+    <!-- <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" role="status"></div>
-    </div>
+    </div> -->
     <!-- Spinner End -->
 
     <!-- Navbar start -->
@@ -188,13 +188,15 @@ include("admin/config.php");
                                         echo '
                                         <div class="dropdown-column">
                                             <h6 class="dropdown-header">' . $category_row['category'] . '</h6>';
-                                        if ($subcategory_result->num_rows > 0) {
-                                            while ($subcategory_row = $subcategory_result->fetch_assoc()) {
-                                                echo '<a class="dropdown-item" href="#">' . $subcategory_row['subcategory_name'] . '</a>';
+                                            if ($subcategory_result->num_rows > 0) {
+                                                while ($subcategory_row = $subcategory_result->fetch_assoc()) {
+                                                    // Use double quotes for the href attribute and embed the PHP variable inside curly braces
+                                                    echo '<a style="margin-left: 10px;" class="dropdown-item" href="product.php?id=' . $subcategory_row['id'] . '">' . $subcategory_row['subcategory_name'] . '</a>';
+                                                }
+                                            } else {
+                                                echo '<span class="dropdown-item text-muted">No subcategories available.</span>';
                                             }
-                                        } else {
-                                            echo '<span class="dropdown-item text-muted">No subcategories available.</span>';
-                                        }
+                                            
                                         echo '</div>';
 
 
@@ -212,7 +214,7 @@ include("admin/config.php");
                             echo "No navbar items found.";
                         }
 
-                        $conn->close();
+                      
                         ?>
 
 
