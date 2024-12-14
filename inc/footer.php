@@ -1,5 +1,20 @@
 
+<?php
 
+$query = "SELECT * FROM settings WHERE id = 1"; // Assuming the data for footer is in the row with id 1
+$result = mysqli_query($conn, $query);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    $logo = $row['logo'];
+    $footer_heading = $row['footer_heading'];
+    $footer_about = $row['footer_about'];
+    $footer_copyright = $row['footer_copyright'];
+    $contact_address = $row['contact_address'];
+    $contact_email = $row['contact_email'];
+    $contact_phone = $row['contact_phone'];
+}
+
+?>
       <!-- Footer Start -->
       <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
         <div class="container py-5">
@@ -7,40 +22,26 @@
                 <div class="row g-4">
                     <div class="col-lg-3">
                         <a href="#">
-                            <h1 class="text-primary mb-0"><img src="./wood-img/Sheeshamwala_Logo_page-0001-removebg-preview.png" alt="" style="width: 100px;">
+                            <h1 class="text-primary mb-0"><img src="admin/uploads/<?= $logo  ?>" alt="" style="width: 100px;">
                             </h1>
                         </a>
                     </div>
-                    <!-- <div class="col-lg-6">
-                        <div class="position-relative mx-auto">
-                            <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="email" placeholder="Your Email">
-                            <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Submit</button>
-                        </div>
-                    </div> -->
-                    <!-- <div class="col-lg-3">
-                        <div class="d-flex justify-content-end pt-3">
-                            <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-item">
-                        <h4 class="text-light mb-3">Why People Like us!</h4>
-                        <p class="mb-4" style="text-align: justify;">People appreciate Dakshayni Handi Craft <br> for its expertly crafted wooden furniture, <br> offering both style and durability.</p>
+                        <h4 class="text-light mb-3"><?= $footer_heading  ?></h4>
+                        <p class="mb-4" style="text-align: justify;"> <?=  $footer_about  ?> </p>
                         <!-- <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a> -->
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="d-flex flex-column text-start footer-item">
                         <h4 class="text-light mb-3">Shop Info</h4>
-                        <a class="btn-link" href="about.phpdetails.php">About Us</a>
+                        <a class="btn-link" href="about.php">About Us</a>
                         <a class="btn-link" href="">Products</a>
-                        <a class="btn-link" href="contact.phpdetails.php">Contact Us</a>
+                        <a class="btn-link" href="contact.php">Contact Us</a>
                         <!-- <a class="btn-link" href="">Privacy Policy</a>
                         <a class="btn-link" href="">Terms & Condition</a> -->
             
@@ -59,11 +60,9 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-item">
                         <h4 class="text-light mb-3">Contact</h4>
-                        <p>Address: WARD NO. 03, THUKRIYASAR, TEH 
-                            DUNGARGARH
-                            BIKANER, RAJASTHAN, 334001</p>
-                        <p>Email:<a href="mailto:"> dakshiyanihandicraft@gmail.com</a></p>
-                        <p>Phone: <a href="tel:+918802621101">+918802621101</a></p>
+                        <p>Address:  <?= $contact_address ?></p>
+                        <p>Email:<a href="mailto:"> <?= $contact_email ?></a></p>
+                        <p>Phone: <a href="tel:+918802621101"> <?= $contact_phone ?></a></p>
                     </div>
                 </div>
 
@@ -89,8 +88,7 @@
     <div class="container-fluid copyright bg-dark py-4">
         <div class="container text-center text-light fs-5">
             <div class="row">
-                <p> Copyright © 2024, Dakshayni Handi Craft
-                    , All Rights Reserved <span class="text-danger" style="font-weight: bolder;"><a href="https://www.bhoomitechzone.in/">Developed By  BTPL</a></span></p>
+                <p> <?= $footer_copyright ?>&nbsp;<span class="text-danger" style="font-weight: bolder;"><a href="https://www.bhoomitechzone.in/">Developed By  BTPL</a></span></p>
             </div>
         </div>
     </div>

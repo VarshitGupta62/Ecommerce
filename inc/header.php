@@ -1,5 +1,18 @@
 <?php
 include("admin/config.php");
+$query = "SELECT * FROM settings WHERE id = 1"; // Assuming the data for footer is in the row with id 1
+$result = mysqli_query($conn, $query);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    $logo = $row['logo'];
+    $favicon = $row['favicon'];
+    $contact_email = $row['contact_email'];
+  
+}
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +36,7 @@ include("admin/config.php");
     <!-- Libraries Stylesheet -->
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+    <link rel="shortcut icon" type="image/png" href="admin/uploads/<?= $favicon ?>">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -129,7 +142,7 @@ include("admin/config.php");
             <div class="d-flex justify-content-between">
                 <div class="top-info ps-2">
                     <small class="me-3"><i class="fas fa-envelope me-4 text-secondary"></i>
-                        <a href="mailto:dakshiyanihandicraft@gmail.com" class="text-white">dakshiyanihandicraft@gmail.com</a></small>
+                        <a href="mailto:dakshiyanihandicraft@gmail.com" class="text-white"><?= $contact_email ?></a></small>
                 </div>
                 <div class="top-link pe-2">
                     <a href="index.php" class="text-white"><small class="text-white mx-2">Home</small>/</a>
@@ -142,7 +155,7 @@ include("admin/config.php");
         <div class="container px-0">
             <nav class="navbar navbar-light bg-white navbar-expand-xl">
                 <a href="index.php" class="navbar-brand d-flex">
-                    <img style="width: 100px;" src="./wood-img/Sheeshamwala_Logo_page-0001-removebg-preview.png" alt="">
+                    <img style="width: 100px;" src="admin/uploads/<?= $logo ?>" alt="">
                 </a>
                 <button
                     class="navbar-toggler py-2 px-3 mr-15px"

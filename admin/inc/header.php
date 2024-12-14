@@ -2,6 +2,17 @@
 
 include("config.php");
 
+$query = "SELECT * FROM settings WHERE id = 1"; // Assuming the data for footer is in the row with id 1
+$result = mysqli_query($conn, $query);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    $logo = $row['logo'];
+    $favicon = $row['favicon'];
+  
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +25,7 @@ include("config.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon icon-->
-    <link rel="shortcut icon" type="image/png" href="assets/images/logos/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="uploads/<?= $favicon ?>">
 
     <!-- Core Css -->
     <link rel="stylesheet" href="assets/css/styles.css">
