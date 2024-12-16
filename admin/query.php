@@ -24,7 +24,7 @@ if (isset($_POST['adminUsername'])) {
     }
 }
 
- 
+
 // Handle logo update request
 if (isset($_FILES['logo'])) {
     $sqlSelect = "SELECT logo FROM settings WHERE id = 1;";
@@ -103,7 +103,7 @@ if (isset($_POST['footer_about'])) {
                       contact_email = ? ,
                       footer_heading = ?
                   WHERE id = 1;";
-    $values = [ $_POST['footer_about'], $_POST['footer_copyright'], $_POST['footer_contact_address'], $_POST['footer_contact_phone_number'], $_POST['footer_contact_email'] , $_POST['footer_heading'] ];
+    $values = [$_POST['footer_about'], $_POST['footer_copyright'], $_POST['footer_contact_address'], $_POST['footer_contact_phone_number'], $_POST['footer_contact_email'], $_POST['footer_heading']];
     $param_types = 'ssssss';
 
     $result = updateIdAvaliable($sqlUpdate, $values, $param_types);
@@ -113,7 +113,7 @@ if (isset($_POST['footer_about'])) {
 if (isset($_POST['loadFooterData'])) {
     // echo "this is server";
     $sql = "SELECT footer_about , footer_copyright , contact_address , contact_phone ,  contact_email , footer_heading  FROM settings WHERE id = 1;";
-    $result = select($sql, [], ''); 
+    $result = select($sql, [], '');
     if ($result) {
         $row = mysqli_fetch_assoc($result);
         echo json_encode($row);
@@ -195,7 +195,7 @@ if (isset($_POST['category_name'])) {
     // echo( "data is sending ");
 
     $sqlInsert = "INSERT INTO category ( category , navbar , status ) VALUES (? , ? , ?)";
-$values = [$_POST['category_name'], $_POST['navbar_id'] ,  1];
+    $values = [$_POST['category_name'], $_POST['navbar_id'],  1];
     $result = insert($sqlInsert,  $values, 'sss');
     if ($result) {
         echo 1;
@@ -212,7 +212,7 @@ if (isset($_POST['loadCategoryData'])) {
         LEFT JOIN navbar n ON c.navbar = n.id
     ";
     $result = mysqli_query($conn, $query);
-    
+
     if (mysqli_num_rows($result) > 0) {
         $sr = 1;
         while ($row = mysqli_fetch_assoc($result)) {
@@ -800,7 +800,7 @@ if (isset($_POST['new_product_name'])) {
 if (isset($_POST['navbar_name'])) {
 
     $sqlInsert = "INSERT INTO navbar (   navbar_name  ) VALUES ( ?)";
-    $values = [ $_POST['navbar_name']];
+    $values = [$_POST['navbar_name']];
     $result = insert($sqlInsert, $values, 's');
     if ($result) {
         echo 1;
@@ -860,3 +860,68 @@ if (isset($_POST['loadNavbar'])) {
         echo "<option value=''>No Sub-categories found</option>";
     }
 }
+
+
+if (isset($_POST['loadCustomerData'])) {
+    $result = selectalldata('customer');
+    if (mysqli_num_rows($result) > 0) {
+        $sr = 1;
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Check if the status is 1 and set the checkbox as checked
+            $isChecked = $row['cust_status'] == 1 ? 'checked' : '';
+            echo "
+            <tr>
+                <td>$sr</td>
+                <td>" . htmlspecialchars($row['cust_name']) . "</td>
+                <td>" . htmlspecialchars($row['cust_email']) . "</td>
+                <td>" . htmlspecialchars($row['cust_phone']) . "</td>
+                <td>" . htmlspecialchars($row['cust_city']) . "</td>
+                <td>" . htmlspecialchars($row['cust_state']) . "</td>
+                <td>" . htmlspecialchars($row['cust_zip']) . "</td>
+                <td> 
+                    <div class='form-check form-switch py-2'>
+                        <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' data-id='$row[id]' $isChecked>
+                    </div>
+                </td>
+                <td>
+                    <button type='button' class='btn mb-1 d-block btn-outline-dark waves-effect waves-light CityDeleteById' 
+                        data-bs-toggle='modal' data-bs-target='#new_samedata_modal' data-bs-whatever='@mdo' data-id='$row[id]'>
+                        <i class='fas fa-trash'></i>
+                    </button>
+                </td>
+            </tr>
+            ";
+            $sr++;
+        }
+    } else {
+        echo "<tr><td colspan='4' class='text-center'>No city found.</td></tr>";
+    }
+}
+
+
+if (isset($_POST['updateCustomerStatus'])) {
+    $id = $_POST['id']; // Category ID
+    $status = $_POST['status']; // New status for the category
+
+    // Update the category status
+    $sqlUpdate = "UPDATE customer SET cust_status = ? WHERE id = ?";
+    $values = [$status, $id];
+    $result = update($sqlUpdate, $values, 'ii'); // Assuming 'update' is your helper function
+
+    if ($result) {
+        if ($status == 0) {
+            // If the category is turned off, turn off all related subcategories
+            $updateCustomerStatus = "UPDATE customer SET cust_status = 0 WHERE id = ?";
+            $customerValues = [$id];
+            update($updateCustomerStatus, $customerValues, 'i');
+        }
+        echo 1; // Success response
+    } else {
+        echo 0; // Failure response
+    }
+}
+
+
+
+
+

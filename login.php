@@ -104,7 +104,7 @@ include("inc/header.php");
   }
 </style>
 
-<div class="contler-log" style="margin-top: 40px;" >
+<div class="contler-log" style="margin-top: 80px;">
   <div class="gaurav-log">
     <div class="form-box">
       <div class="form login-form">
@@ -124,17 +124,23 @@ include("inc/header.php");
       </div>
       <div class="form register-form hidden">
         <h2>Register</h2>
-        <form id="loginForm" >
+        <form id="loginForm">
           <div class="input-box">
             <input type="text" name="login_name" required>
             <label>Full Name</label>
           </div>
           <div class="input-box">
-            <input type="text" name="login_mobile" required>
+            <input
+              type="number"
+              id="mobileInput"
+              name="login_mobile"
+              maxlength="10"
+              required
+              placeholder="Enter your 10-digit mobile number">
             <label>Mobile No.</label>
           </div>
           <div class="input-box">
-            <input type="gmail" name="login_gmail" required>
+            <input type="email" name="login_gmail" required>
             <label>Gmail</label>
           </div>
           <div class="input-box">
@@ -145,9 +151,26 @@ include("inc/header.php");
           <p class="switch">Already have an account? <a href="#" id="loginLink">Sign In</a></p>
         </form>
       </div>
+      <div class="form otp-form hidden">
+        <h2>Verify OTP</h2>
+        <form id="otpForm">
+          <div class="input-box">
+            <input type="number" name="otp" required>
+            <label>OTP</label>
+          </div>
+          <button type="submit" class="btn">Verify OTP</button>
+          <div id="timer" class="timer"></div>
+          <br>
+          <button type="button" id="resendOtpBtn" class="btn">Resend OTP</button>
+        </form>
+      </div>
+
+
     </div>
   </div>
 </div>
+
+
 
 
 
@@ -190,7 +213,7 @@ include("inc/header.php");
 <script src="lib/waypoints/waypoints.min.js"></script>
 <script src="lib/lightbox/js/lightbox.min.js"></script>
 <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Template Javascript -->
 <script src="./js/addtocart.js"></script>
 <script src="js/main.js"></script>
@@ -204,9 +227,187 @@ include("inc/header.php");
   })
 </script>
 
- <script>
+<script>
   
- </script>
+
+  $('#loginForm').on('submit', function(e) {
+    e.preventDefault();
+
+    // Disable the submit button to prevent multiple clicks
+    const submitButton = $(this).find('button[type="submit"]');
+    submitButton.prop('disabled', true);
+
+    let formData = new FormData(this);
+
+    // Validate form data (basic client-side validation)
+    let isValid = true;
+    let mobileNumber = $('#mobileInput').val().trim();
+
+    $('#loginForm input').each(function() {
+        if ($(this).val().trim() === '') {
+            isValid = false;
+            Swal.fire("Please fill all the fields", "", "warning");
+            submitButton.prop('disabled', false); // Re-enable the button on validation failure
+            return false; // Exit the loop on the first empty field
+        }
+    });
+
+    // Validate Mobile Number
+    if (isValid && !/^\d{10}$/.test(mobileNumber)) { // Check if the number is exactly 10 digits
+        isValid = false;
+        Swal.fire("Invalid Mobile Number", "Please enter a valid 10-digit mobile number.", "warning");
+        submitButton.prop('disabled', false); // Re-enable the button on validation failure
+        return;
+    }
+
+    if (!isValid) return; // Exit if validation fails
+
+    $.ajax({
+        url: 'admin/userlogin.php',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            // alert(response);
+            let res = JSON.parse(response);
+
+            if (res.status === 1) {
+                Swal.fire("Success", "Please enter the OTP sent to your email.", "success");
+
+                // Hide the login form and show the OTP form
+                $('.register-form').addClass('hidden');
+                $('.otp-form').removeClass('hidden');
+                timerDuration = 300; // Reset to 5 minutes
+                startTimer();
+
+            } else {
+                Swal.fire("Error", res.message, "error");
+                submitButton.prop('disabled', false); // Re-enable the button on error
+            }
+        },
+        error: function() {
+            Swal.fire("Something went wrong.", "", "error");
+            submitButton.prop('disabled', false); // Re-enable the button on error
+        }
+    });
+});
+
+
+  $('#otpForm').on('submit', function(e) {
+    e.preventDefault();
+    // alert("otp button clicked");
+    let otp = $('input[name="otp"]').val();
+    const submitButton = $(this).find('button[type="submit"]');
+    submitButton.prop('disabled', true);
+
+
+    $.ajax({
+      url: 'admin/userlogin.php',
+      type: 'POST',
+      data: {
+        otp: otp
+      },
+      success: function(response) {
+        // alert(response);
+        let res = JSON.parse(response);
+
+
+        if (res.status == 1) {
+          Swal.fire({
+            title: "Success!",
+            text: res.message,
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonText: "Continue",
+            preConfirm: () => {
+              // After the user clicks the "Continue" button
+              window.location.href = "login.php"; // Redirect to the login page
+            }
+          });
+        } else {
+          Swal.fire("Error", res.message, "error");
+          submitButton.prop('disabled', false); // Re-enable the button on error
+        }
+      },
+      error: function(err) {
+        Swal.fire("Something went wrong.", "", "error");
+        submitButton.prop('disabled', false); // Re-enable the button on error
+      }
+    });
+  });
+
+  document.getElementById("resendOtpBtn").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const resendbutton = $(this); // This is the correct way to select the button using jQuery
+    resendbutton.prop('disabled', true); // Disable the button to prevent multiple clicks
+
+    $.ajax({
+      url: 'admin/userlogin.php',
+      type: 'POST',
+      data: {
+        resend_otp: true
+      },
+      success: function(response) {
+        let res = JSON.parse(response); // Parse the JSON response
+
+        if (res.status === 1) {
+          Swal.fire("Success", res.message, "success");
+
+          timerDuration = 300; // Reset to 5 minutes
+          startTimer();
+
+        } else {
+          Swal.fire("Error", res.message, "error");
+          resendbutton.prop('disabled', false); // Re-enable the button if there is an error
+        }
+      },
+      error: function() {
+        Swal.fire("Something went wrong.", "", "error");
+        resendbutton.prop('disabled', false); // Re-enable the button if there's an error in the request
+      }
+    });
+  });
+
+
+
+  let timerDuration = 300; // 5 minutes in seconds
+  const resendOtpBtn = document.getElementById('resendOtpBtn');
+  const timerDisplay = document.getElementById('timer');
+
+  function startTimer() {
+    resendOtpBtn.disabled = true; // Disable the button when the timer starts
+    resendOtpBtn.textContent = "Resend OTP";
+
+    // Initial message display
+    timerDisplay.innerHTML = `Your OTP will expire in <span id="countdown"></span>`;
+    const countdownSpan = document.getElementById('countdown');
+
+    const interval = setInterval(function() {
+      // Calculate minutes and seconds
+      const minutes = Math.floor(timerDuration / 60);
+      const seconds = timerDuration % 60;
+
+      // Format the time as MM:SS
+      countdownSpan.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+      // Decrease the timer by 1 second
+      timerDuration--;
+
+      // When timer expires
+      if (timerDuration < 0) {
+        clearInterval(interval);
+        timerDisplay.textContent = "Your OTP has expired."; // Update to expiration message
+        resendOtpBtn.disabled = false; // Enable the "Resend OTP" button
+        resendOtpBtn.textContent = "Resend OTP"; // Change button text
+      }
+    }, 1000); // Update every 1000ms (1 second)
+  }
+
+
+ 
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 

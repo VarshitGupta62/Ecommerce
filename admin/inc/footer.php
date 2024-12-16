@@ -268,8 +268,8 @@
 <script src="assets/js/dashboards/dashboard1.js"></script>
 <script src="assets/libs/fullcalendar/index.global.min.js"></script>
 <script src="assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
-  <script src="assets/js/forms/sweet-alert.init.js"></script>
- 
+<script src="assets/js/forms/sweet-alert.init.js"></script>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
@@ -292,6 +292,7 @@
             responsive: true
         });
     });
+    
 </script>
 
 
