@@ -861,16 +861,16 @@ if (isset($_POST['loadNavbar'])) {
     }
 }
 
-
 if (isset($_POST['loadCustomerData'])) {
     $result = selectalldata('customer');
     if (mysqli_num_rows($result) > 0) {
         $sr = 1;
         while ($row = mysqli_fetch_assoc($result)) {
-            // Check if the status is 1 and set the checkbox as checked
+            // Check if the status is 1 (active) or 0 (inactive)
             $isChecked = $row['cust_status'] == 1 ? 'checked' : '';
+            $rowClass = $row['cust_status'] == 0 ? 'table-danger' : ''; // Add red background for inactive users
             echo "
-            <tr>
+            <tr class='$rowClass'>
                 <td>$sr</td>
                 <td>" . htmlspecialchars($row['cust_name']) . "</td>
                 <td>" . htmlspecialchars($row['cust_email']) . "</td>
@@ -883,18 +883,12 @@ if (isset($_POST['loadCustomerData'])) {
                         <input class='form-check-input' type='checkbox' id='flexSwitchCheckDefault' data-id='$row[id]' $isChecked>
                     </div>
                 </td>
-                <td>
-                    <button type='button' class='btn mb-1 d-block btn-outline-dark waves-effect waves-light CityDeleteById' 
-                        data-bs-toggle='modal' data-bs-target='#new_samedata_modal' data-bs-whatever='@mdo' data-id='$row[id]'>
-                        <i class='fas fa-trash'></i>
-                    </button>
-                </td>
             </tr>
             ";
             $sr++;
         }
     } else {
-        echo "<tr><td colspan='4' class='text-center'>No city found.</td></tr>";
+        echo "<tr><td colspan='4' class='text-center'>No customer found.</td></tr>";
     }
 }
 

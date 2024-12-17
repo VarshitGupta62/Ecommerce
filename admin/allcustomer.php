@@ -5,6 +5,12 @@ if (!isset($_SESSION['adminUsername'])) {
 }
 include("inc/header.php");
 ?>
+<style>
+    .table-danger {
+        background-color: #f8d7da !important;
+        color: blue !important;
+    }
+</style>
 
 <div class="body-wrapper">
     <div class="container-fluid">
@@ -29,7 +35,6 @@ include("inc/header.php");
                                             <th>State</th>
                                             <th>Zip code</th>
                                             <th>Status</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="loadCustomerData">
@@ -46,14 +51,14 @@ include("inc/header.php");
         </div>
     </div>
 </div>
- 
+
 
 <?php include("inc/footer.php"); ?>
 
 <script>
     $(document).ready(function() {
         $('#data_show').DataTable({
-            
+
             responsive: true,
             lengthMenu: [10, 25, 50, 100], // Options for the number of rows to show
             pageLength: 10 // Default number of rows displayed
@@ -62,7 +67,6 @@ include("inc/header.php");
 </script>
 
 <script>
-
     function loadCustomerData() {
         // alert("load function work");
         $.ajax({
@@ -82,6 +86,14 @@ include("inc/header.php");
     $(document).on('change', '.form-check-input', function() {
         let categoryId = $(this).data('id');
         let newStatus = $(this).is(':checked') ? 1 : 0;
+        let row = $(this).closest('tr'); // Get the closest row for the customer
+
+        // Update the row color based on the status immediately
+        if (newStatus == 1) {
+            row.removeClass('table-danger'); // Remove red background for active status
+        } else {
+            row.addClass('table-danger'); // Add red background for inactive status
+        }
 
         $.ajax({
             url: "query.php",
@@ -103,43 +115,4 @@ include("inc/header.php");
             },
         });
     });
-
-    $(document).on("click", ".deleteCustomer", function() {
-        let id = $(this).data("id");
-        let img = $(this).data("deleteimg");
-
-        Swal.fire({
-            title: "Are you sure?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "query.php",
-                    type: "POST",
-                    data: {
-                        deleteCustomerById: id,
-                        deleteCustomerByImg: img
-                    },
-                    success: function(response) {
-                        if (response == 1) {
-                            Swal.fire("Deleted!", "Customer deleted successfully.", "success");
-                            loadCustomerData();
-                        } else {
-                            Swal.fire("Error!", "Failed to delete Customer.", "error");
-                        }
-                    },
-                    error: function() {
-                        Swal.fire("Error!", "An error occurred.", "error");
-                    }
-                });
-            }
-        });
-    });
-
-
-    
 </script>
