@@ -46,7 +46,7 @@ include("inc/header.php");
                         <div class="col-12">
                             <div class="text-center mx-auto" style="max-width: 700px;">
                                 <h1 class="text-primary">Get in touch</h1>
-                                <p class="mb-4">Dakshayni Handicraft specializes in intricately crafted wooden items, blending traditional artistry with modern designs. Their products, made from high-quality wood, reflect craftsmanship and attention to detail. Ideal for home décor, gifting, or functional purposes, each piece showcases the beauty and durability of wood. <a href="about.html">Read More</a>.</p>
+                                <p class="mb-4">Dakshayni Handicraft specializes in intricately crafted wooden items, blending traditional artistry with modern designs. Their products, made from high-quality wood, reflect craftsmanship and attention to detail. Ideal for home décor, gifting, or functional purposes, each piece showcases the beauty and durability of wood. <a href="about.php">Read More</a>.</p>
                             </div>
                         </div>
                         

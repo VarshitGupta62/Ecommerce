@@ -915,7 +915,120 @@ if (isset($_POST['updateCustomerStatus'])) {
     }
 }
 
+if (isset($_POST['about_title'])) {
+
+    $id = 1;
+
+    $sqlSelect = "SELECT about_image FROM about_section WHERE id = ?";
+    $currentImage = selectSingleValue($sqlSelect, [$id], 'i');
+
+    $uploadedImages = []; // Array to store uploaded image names
+
+    if (isset($_FILES['about_images'])) {
+        $fileNames = $_FILES['about_images']['name'];
+        $fileTmpNames = $_FILES['about_images']['tmp_name'];
+
+        foreach ($fileNames as $key => $fileName) {
+            if ($_FILES['about_images']['error'][$key] == UPLOAD_ERR_OK) {
+                // Generate a random filename for each image
+                $newFileName = rand() . rand() . basename($fileName);
+
+                // Move the uploaded file to the 'uploads' directory
+                if (move_uploaded_file($fileTmpNames[$key], "uploads/" . $newFileName)) {
+                    $uploadedImages[] = $newFileName;
+                }
+            }
+        }
+    }
+
+    // Update the database
+    if (!empty($uploadedImages)) {
+        // Join all image filenames into a single string for storage (optional)
+        $imageNamesString = implode(',', $uploadedImages);
+
+        // Update with new images
+        $sqlUpdate = "UPDATE about_section 
+                      SET about_title = ?, 
+                          about_content = ?, 
+                          about_image = ?, 
+                          updated_at = NOW() 
+                      WHERE id = ?";
+        $values = [
+            $_POST['about_title'],
+            $_POST['about_content'],
+            $imageNamesString,
+            $id
+        ];
+        $param_types = 'sssi';
+
+    } else {
+        // Update without changing images
+        $sqlUpdate = "UPDATE about_section 
+                      SET about_title = ?, 
+                          about_content = ?, 
+                          updated_at = NOW() 
+                      WHERE id = ?";
+        $values = [
+            $_POST['about_title'],
+            $_POST['about_content'],
+            $id
+        ];
+        $param_types = 'ssi';
+    }
+
+    // Execute the database update query
+    $result = update($sqlUpdate, $values, $param_types);
+
+    // Return the result
+    if ($result) {
+        echo 1; // Success
+    } else {
+        echo 0; // Failure
+    }
+}
 
 
 
+if (isset($_POST['loadAboutData'])) {
+    $query = "SELECT about_title, about_content, about_image FROM about_section WHERE id = 1"; // Change as needed
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    echo json_encode($row);
+}
+
+if (isset($_POST['deleteImage']) && isset($_POST['imageName'])) {
+    $imageName = $_POST['imageName'];
+    $imagePath = "uploads/" . $imageName;
+
+    // Check if the file exists and delete it
+    if (file_exists($imagePath)) {
+        if (unlink($imagePath)) {
+            // Update database to remove only the specified image from the field
+            $query = "SELECT about_image FROM about_section WHERE FIND_IN_SET(?, about_image)";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("s", $imageName);
+            $stmt->execute();
+            $stmt->bind_result($existingImages);
+            $stmt->fetch();
+            $stmt->close();
+
+            // Remove the deleted image from the list and update the database
+            if ($existingImages) {
+                $updatedImages = implode(',', array_diff(explode(',', $existingImages), [$imageName]));
+                $updateStmt = $conn->prepare("UPDATE about_section SET about_image = ? WHERE FIND_IN_SET(?, about_image)");
+                $updateStmt->bind_param("ss", $updatedImages, $imageName);
+                $updateStmt->execute();
+                $updateStmt->close();
+            }
+
+            echo 1; // Success
+        } else {
+            echo 0; // Failed to delete file
+        }
+    } else {
+        echo 0; // File not found
+    }
+    exit;
+}
 

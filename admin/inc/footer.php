@@ -269,6 +269,12 @@
 <script src="assets/libs/fullcalendar/index.global.min.js"></script>
 <script src="assets/libs/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="assets/js/forms/sweet-alert.init.js"></script>
+<script src="assets/libs/quill/dist/quill.min.js"></script>
+<script src="assets/js/forms/quill-init.js"></script>
+<script src="assets/js/forms/repeater-init.js"></script>
+<script src="npm/iconify-icon%401.0.8/dist/iconify-icon.min.js"></script>
+  <script src="assets/libs/jquery.repeater/jquery.repeater.min.js"></script>
+  <script src="assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -279,6 +285,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
 <!-- <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script> -->
 

@@ -34,6 +34,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     <link rel="stylesheet" href="buttons/2.4.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="assets/libs/sweetalert2/dist/sweetalert2.min.css">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/libs/quill/dist/quill.snow.css">
 
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css"> -->
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
